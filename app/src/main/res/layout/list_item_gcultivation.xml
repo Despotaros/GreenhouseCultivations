@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/view6"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <atzios.greenhouse.cultivations.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvCultivation"
+                android:text="Cultivation"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp" />
+
+            <atzios.greenhouse.cultivations.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvDate"
+                android:text="Date"
+                android:textSize="16sp"
+                android:layout_below="@+id/tvComments"
+                android:layout_alignLeft="@+id/tvComments"
+                android:layout_alignStart="@+id/tvComments"
+                android:layout_marginBottom="5dp" />
+
+            <atzios.greenhouse.cultivations.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvDuration"
+                android:layout_alignBottom="@+id/tvDate"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textSize="16sp"
+                android:text="Duration"
+                android:layout_marginRight="10dp" />
+
+            <atzios.greenhouse.cultivations.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvComments"
+                android:text="comments"
+                android:textSize="18sp"
+                android:layout_below="@+id/tvCultivation"
+                android:layout_alignLeft="@+id/tvCultivation"
+                android:layout_alignStart="@+id/tvCultivation"
+                android:layout_alignRight="@+id/tvDuration"
+                android:layout_marginBottom="5dp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

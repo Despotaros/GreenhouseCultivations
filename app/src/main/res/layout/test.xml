@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spCultNames"
+            android:layout_below="@+id/view"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:spinnerMode="dropdown"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spJobNames"
+            android:spinnerMode="dropdown"
+            android:layout_below="@+id/view10"
+            android:layout_alignLeft="@+id/view10"
+            android:layout_alignStart="@+id/view10"
+            android:layout_toLeftOf="@+id/btnAddJob"
+            android:layout_toStartOf="@+id/btnAddJob" />
+
+        <atzios.greenhouse.cultivations.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view"
+            android:text="@string/cultivation"
+            android:textSize="20sp"
+            android:textColor="@color/primaryText"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="5dp" />
+        <atzios.greenhouse.cultivations.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view10"
+            android:text="@string/job"
+            android:textSize="20sp"
+            android:textColor="@color/primaryText"
+
+            android:layout_below="@+id/spCultNames" />
+        <atzios.greenhouse.cultivations.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/view2"
+            android:text="@string/pick_date"
+            android:textColor="@color/primaryText"
+            android:textSize="20sp"
+            android:layout_below="@+id/spJobNames"
+            android:layout_alignLeft="@+id/spCultNames"
+            android:layout_alignStart="@+id/spCultNames" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:id="@+id/btnDate"
+            android:layout_below="@+id/view2"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_new"
+            android:id="@+id/btnAddJob"
+            android:layout_alignTop="@+id/spJobNames"
+            android:layout_alignRight="@+id/spCultNames"
+            android:layout_alignEnd="@+id/spCultNames" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/active"
+            android:id="@+id/cbActive"
+            android:checked="true"
+            android:layout_below="@+id/btnDate"
+            android:layout_alignLeft="@+id/view2"
+            android:layout_alignStart="@+id/view2"
+            android:layout_marginBottom="10dp" />
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view5"
+        android:text="@string/comments"
+        android:textColor="@color/primaryText"
+        android:textSize="20sp"
+        android:layout_below="@+id/cbActive"
+        android:layout_alignLeft="@+id/cbActive"
+        android:layout_alignStart="@+id/cbActive" />
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/edComments"
+        android:hint="@string/hint_comments"
+        android:layout_below="@+id/view5"
+        android:layout_alignLeft="@+id/view5"
+        android:layout_alignStart="@+id/view5"
+        android:layout_alignRight="@+id/btnAddJob"
+        android:layout_alignEnd="@+id/btnAddJob" />
+
+</RelativeLayout>
+

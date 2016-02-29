@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:id="@+id/textView"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/primaryText"
+        android:textSize="20sp" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edName"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:hint="@string/hint_greenhouse_name"
+        android:singleLine="true" />
+
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/area"
+        android:id="@+id/textView2"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:textColor="@color/primaryText" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edArea"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:singleLine="true"
+        android:numeric="decimal"
+        android:hint="@string/hint_greenhouse_area" />
+
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/address"
+        android:id="@+id/textView16"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        android:textColor="@color/primaryText" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edAddress"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:hint="@string/hint_greenhouse_address"
+            android:singleLine="true"
+            android:layout_toLeftOf="@+id/imageButton"
+            android:layout_toStartOf="@+id/imageButton"
+            android:layout_marginRight="8dp" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/imageButton"
+            android:layout_marginRight="16dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_place_black_24dp"
+            style="@style/Nav_Button_Style" />
+    </RelativeLayout>
+
+
+</LinearLayout>

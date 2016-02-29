@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ScrollView
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/scInfo"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        >
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/cvName"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp">
+            <RelativeLayout
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/greenhouse"
+                    android:id="@+id/tvLabelGH"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="20sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/tvGH"
+                    android:layout_below="@+id/tvLabelGH"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/btnCamera"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    style="@style/Nav_Button_Style"
+                    android:src="@drawable/ic_camera_alt_black_24dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cvAddress"
+            android:layout_below="@+id/cvName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+
+            <RelativeLayout
+                android:padding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/address"
+                    android:id="@+id/tvLabelAddress"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="20sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/tvAddress"
+                    android:layout_below="@+id/tvLabelAddress"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/btnNavi"
+                    android:src="@drawable/ic_navigation_black_24dp"
+                    style="@style/Nav_Button_Style"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cvArea"
+            android:layout_below="@+id/cvAddress"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/area"
+                    android:id="@+id/tvLabelArea"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="20sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/tvArea"
+                    android:layout_below="@+id/tvLabelArea"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cvCultivations"
+            android:layout_below="@+id/cvArea"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/cultivations"
+                    android:id="@+id/tvLabelCult"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="20sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_total"
+                    android:id="@+id/textView3"
+                    android:layout_below="@+id/tvLabelCult"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_active"
+                    android:id="@+id/textView4"
+                    android:layout_below="@+id/textView3"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_completed"
+                    android:id="@+id/textView5"
+                    android:layout_below="@+id/textView4"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_total"
+                    android:id="@+id/tvTotalCultivations"
+                    android:layout_above="@+id/textView4"
+                    android:layout_toRightOf="@+id/textView3"
+                    android:layout_toEndOf="@+id/textView3"
+                    android:textSize="16sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_total"
+                    android:id="@+id/tvActiveCultivations"
+                    android:layout_alignTop="@+id/textView4"
+                    android:layout_toRightOf="@+id/textView4"
+                    android:layout_toEndOf="@+id/textView4"
+                    android:textSize="16sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_total"
+                    android:id="@+id/tvCompletedCultvations"
+                    android:layout_alignBottom="@+id/textView5"
+                    android:layout_toRightOf="@+id/textView5"
+                    android:layout_toEndOf="@+id/textView5"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cvWorks"
+            android:layout_below="@+id/cvCultivations"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/works"
+                    android:id="@+id/textView9"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="20sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_total"
+                    android:id="@+id/textView10"
+                    android:layout_below="@+id/textView9"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_pending"
+                    android:id="@+id/textView11"
+                    android:layout_below="@+id/textView10"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_completed"
+                    android:id="@+id/textView12"
+                    android:layout_below="@+id/textView11"
+                    android:textSize="16sp" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_total"
+                    android:id="@+id/tvTotalWorks"
+                    android:textSize="16sp"
+                    android:layout_above="@+id/textView11"
+                    android:layout_toRightOf="@+id/textView10"
+                    android:layout_toEndOf="@+id/textView10" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_pending"
+                    android:id="@+id/tvCompletedWorks"
+                    android:textSize="16sp"
+                    android:layout_alignBottom="@+id/textView12"
+                    android:layout_toRightOf="@+id/textView12"
+                    android:layout_toEndOf="@+id/textView12" />
+
+                <atzios.greenhouse.cultivations.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/label_pending"
+                    android:id="@+id/tvPendingWorks"
+                    android:textSize="16sp"
+                    android:layout_below="@+id/tvTotalWorks"
+                    android:layout_toRightOf="@+id/textView11"
+                    android:layout_toEndOf="@+id/textView11" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+
+    </RelativeLayout>
+
+
+</ScrollView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:src="@drawable/ic_delete_white_24dp"
+        app:layout_anchor="@id/scInfo"
+        app:layout_anchorGravity="bottom|right"/>
+</android.support.design.widget.CoordinatorLayout>

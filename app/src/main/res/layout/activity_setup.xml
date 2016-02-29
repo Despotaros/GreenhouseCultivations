@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/wave">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/abc_action_bar_default_height_material"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ActivitySetUpContractor"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <!--
+        This title strip will display the currently visible page title, as well as the page
+        titles for adjacent pages.
+        -->
+
+    </android.support.v4.view.ViewPager>
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/btnStart"
+        style="@style/Circle_Button_Style"
+        android:src="@drawable/ic_keyboard_arrow_right_white_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginBottom="15dp"
+        android:padding="-5dp" />
+
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cTv"
+
+        android:text="@string/lets_start"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/btnStart"
+        android:layout_toLeftOf="@+id/btnStart"
+        android:layout_toStartOf="@+id/btnStart"
+        android:layout_marginRight="10dp"
+        android:textColor="#FFFFFF" />
+
+
+</RelativeLayout>

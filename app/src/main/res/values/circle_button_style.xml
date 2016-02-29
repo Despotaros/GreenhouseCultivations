@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Circle_Button_Style" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/circle_button</item>
+        <item name="elevation">10dp</item>
+    </style>
+</resources>

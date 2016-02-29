@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- group with single selected item so only one item is highlighted in the nav menu -->
+  <group android:checkableBehavior="single" android:id="@+id/menu_up" >
+
+    <item
+      android:id="@+id/drawer_info"
+        android:icon="@drawable/farm"
+      android:title="@string/greenhouse_info"/>
+      <item
+          android:id="@+id/drawer_calendar"
+          android:icon="@drawable/calendar"
+          android:title="@string/calendar"/>
+      <item
+          android:id="@+id/drawer_cultivations"
+          android:icon="@drawable/sprout_field"
+          android:title="@string/cultivations"/>
+    <item
+      android:id="@+id/drawer_work"
+      android:icon="@drawable/wheelbarrow"
+      android:title="@string/works"/>
+
+  </group>
+    <group android:checkableBehavior="none" android:id="@+id/menu_bottom" >
+        <item
+            android:id="@+id/drawer_jobs_cult_types"
+            android:icon="@drawable/plant"
+            android:title="@string/jobs_cult_types"/>
+        <item
+            android:id="@+id/drawer_settings"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="@string/action_settings"/>
+    </group>
+
+</menu>

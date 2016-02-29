@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Nav_Button_Style" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/nav_button</item>
+    </style>
+</resources>
