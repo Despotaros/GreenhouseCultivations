@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,7 +85,8 @@ public class NewWorkActivity extends AppCompatActivity {
                     @Override
                     public void onDatePicked(int year, int month, int day) {
                         Calendar calendar = Calendar.getInstance();
-                        calendar.set(year,month,day);
+                        calendar.set(year,month,day,0,0,0);
+
                         java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewWorkActivity.this);
                         btn.setText(dateFormat.format(calendar.getTime()));
                         work.setDate(calendar.getTime().getTime());
