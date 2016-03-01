@@ -27,6 +27,7 @@ import java.util.Date;
 import atzios.greenhouse.cultivations.DialogPickDate;
 import atzios.greenhouse.cultivations.Greenhouse;
 import atzios.greenhouse.cultivations.R;
+import atzios.greenhouse.cultivations.contents.ContentCultivation;
 import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 import atzios.greenhouse.cultivations.contents.ContentJob;
 import atzios.greenhouse.cultivations.contents.ContentWork;
@@ -135,7 +136,8 @@ public class NewWorkActivity extends AppCompatActivity {
             index++;
             if(work.getCultivationId() == cult.getId())
                 pos = index;
-            names.add(cultTypeHelper.get(cult.getCultivationId()).getName());
+            ContentCultivation c = cultTypeHelper.get(cult.getCultivationId());
+            names.add(c.getName() + " - " + c.getComments());
         }
 
         Spinner spinner = (Spinner)findViewById(R.id.spCultNames);
@@ -176,7 +178,7 @@ public class NewWorkActivity extends AppCompatActivity {
             index ++;
             if(job.getId() == work.getJobId())
                 pos = index;
-            names.add(job.getName());
+            names.add(job.getName() + " - " + job.getComments());
         }
 
         Spinner spinner = (Spinner)findViewById(R.id.spJobNames);

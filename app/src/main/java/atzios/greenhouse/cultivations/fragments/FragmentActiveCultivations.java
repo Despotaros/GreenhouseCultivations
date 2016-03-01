@@ -126,7 +126,7 @@ public class FragmentActiveCultivations extends Fragment {
             //Set values of objects for every item
             DataHelperCultivation cult = new DataHelperCultivation(context);
             String name = cult.get(contents.get(position).getCultivationId()).getName();
-            holder.cult.setText(name);
+            holder.cult.setText(name + "-" + cult.get(contents.get(position).getCultivationId()).getComments() );
             holder.comments.setText(context.getText(R.string.comments)+":"+(contents.get(position).getComments()));
             int duration = contents.get(position).getDuration();
             if(duration == -1)

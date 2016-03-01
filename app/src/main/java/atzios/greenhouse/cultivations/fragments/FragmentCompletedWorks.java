@@ -136,13 +136,15 @@ public class FragmentCompletedWorks extends Fragment {
 
             DataHelperCultivation cultHelper = new DataHelperCultivation(context);
             String name = cultHelper.get(cult.getCultivationId()).getName();
+            String comments = cultHelper.get(cult.getCultivationId()).getComments();
             if(name == null || name.equals(""))
                 name = context.getText(R.string.not_selected).toString();
-            holder.cult.setText(context.getText(R.string.on)+":"+name);
+            holder.cult.setText(context.getText(R.string.on)+":"+name +" - "+comments);
             holder.comments.setText(context.getText(R.string.comments) + ":" + (contents.get(position).getComments()));
 
             DataHelperJob helperJob = new DataHelperJob(context);
-            holder.job.setText(helperJob.get(contents.get(position).getJobId()).getName());
+            holder.job.setText(helperJob.get(contents.get(position).getJobId()).getName() +" - " +
+                    helperJob.get(contents.get(position).getJobId()).getComments());
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date(contents.get(position).getDate()));
             java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
