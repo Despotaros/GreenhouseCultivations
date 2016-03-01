@@ -81,7 +81,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_place_black_24dp"
-            style="@style/Nav_Button_Style" />
+            style="@style/Nav_Button_Style"
+            android:visibility="gone" />
     </RelativeLayout>
 
 
