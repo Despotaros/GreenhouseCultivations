@@ -92,7 +92,7 @@ public class NewCultivationActivity extends AppCompatActivity {
 
                     }
                 });
-                dialogPickDate.create().show();
+                dialogPickDate.create(greenhouseCultivation.getDate()).show();
             }
         });
 

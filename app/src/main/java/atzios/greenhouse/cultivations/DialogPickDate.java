@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * DialogPickDate
  * Διαλογος οπου εμφανιζει και επισρεφει την ημερομηνια που επιλεγει ο χρηστης
@@ -39,13 +42,20 @@ public class DialogPickDate {
 
     /**
      * Δημιουργει και επιστρεφει τον διαλογο
+     * @param time Με συγκεκριμενη ημερομηνια (Αν δωσουμε -1 κραταει την σημερινη )
      * @return Το διαλογο
      */
-    public Dialog create() {
+    public Dialog create(long time) {
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_pick_date,(ViewGroup)parent,false);
         alertDialog.setView(dialogView);
         final DatePicker datePicker = (DatePicker)dialogView.findViewById(R.id.datePicker);
+        if(time != -1) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date(time));
+            datePicker.updateDate(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+        }
 
         alertDialog.setPositiveButton(R.string.set, new DialogInterface.OnClickListener() {
             @Override

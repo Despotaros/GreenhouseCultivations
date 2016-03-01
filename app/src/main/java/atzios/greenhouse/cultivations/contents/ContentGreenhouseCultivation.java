@@ -21,7 +21,7 @@ public class ContentGreenhouseCultivation {
         duration = 0;
         active = true;
         comments = "";
-        date = 0 ;
+        date = -1 ;
         cultivationId = -1;
         greenhouseId = -1;
 

@@ -93,7 +93,8 @@ public class NewWorkActivity extends AppCompatActivity {
 
                     }
                 });
-                dialogPickDate.create().show();
+                dialogPickDate.create(work.getDate()).show();
+
             }
         });
 

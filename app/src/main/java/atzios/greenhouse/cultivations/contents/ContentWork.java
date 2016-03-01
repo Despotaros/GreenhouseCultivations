@@ -18,7 +18,7 @@ public class ContentWork {
 
     public ContentWork() {
         comments = "";
-        date = 0;
+        date = -1;
         id = -1;
         userId = -1;
         jobId = -1;
