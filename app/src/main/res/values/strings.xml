@@ -78,5 +78,6 @@
   <string name="select_job_type">Select what job you will perform first.</string>
   <string name="not_selected">Not selected...</string>
   <string name="on">On</string>
+  <string name="permission_denied" translatable="false">Permission denied! Grand the permission first.</string>
 
 </resources>

@@ -1,9 +1,11 @@
 package atzios.greenhouse.cultivations.fragments;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,7 +27,9 @@ import java.io.File;
 import java.io.IOException;
 
 
+
 import atzios.greenhouse.cultivations.Greenhouse;
+import atzios.greenhouse.cultivations.PermissionManager;
 import atzios.greenhouse.cultivations.R;
 
 import atzios.greenhouse.cultivations.contents.ContentGreenhouse;
@@ -94,7 +98,13 @@ public class FragmentInfo extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dispatchTakePictureIntent();
+                if(PermissionManager.checkPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    dispatchTakePictureIntent();
+                }
+                else if (PermissionManager.requestPermission(getActivity(), FragmentInfo.this, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        PermissionManager.PERMISSION_CODE_REQUEST_STORAGE)) {
+                    dispatchTakePictureIntent();
+                }
             }
         });
 
@@ -277,6 +287,7 @@ public class FragmentInfo extends Fragment {
      * Καλουμε το activity για να τραβηξουμε μια φωτογραφια
      */
     private void dispatchTakePictureIntent() {
+
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -296,6 +307,23 @@ public class FragmentInfo extends Fragment {
         }
         else
             Toast.makeText(getActivity(),"null",Toast.LENGTH_LONG).show();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PermissionManager.PERMISSION_CODE_REQUEST_STORAGE:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //Permission granted
+
+                }
+                else //Toast a message to the user that permission denied(By him)
+                    Toast.makeText(getActivity(),R.string.permission_denied,Toast.LENGTH_LONG).show();
+                break;
+            default:
+                break;
+        }
     }
 
     /**
