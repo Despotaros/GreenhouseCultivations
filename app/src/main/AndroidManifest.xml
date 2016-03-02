@@ -28,6 +28,8 @@
         <activity android:name=".activities.JobsAndCultActivity" android:label="@string/jobs_cult_types" android:screenOrientation="portrait"/>
         <activity android:name=".activities.NewCultivationActivity" android:label="@string/new_cultivation" android:screenOrientation="portrait" />
         <activity android:name=".activities.NewWorkActivity" android:label="@string/new_work" android:screenOrientation="portrait" />
+        <activity android:name=".activities.SettingsActivity" android:label="@string/action_settings" android:screenOrientation="portrait" />
+
 
     </application>
 
