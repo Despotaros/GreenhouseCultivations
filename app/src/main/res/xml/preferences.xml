@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory android:title="@string/notifications_settings">
+        <SwitchPreference android:title="@string/notifications"
+            android:summary="@string/notifications_summary"
+            android:key="notifications" />
+        <EditTextPreference android:title="@string/day_offset"
+            android:summary="@string/day_offset_summary"
+            android:numeric="integer"
+            android:key="notification_offset"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/data">
+        <PreferenceScreen android:title="@string/delete_data"
+            android:key="delete_data"
+            android:summary="@string/delete_data_summary"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/about">
+        <PreferenceScreen android:title="@string/version"
+            android:key="version"
+            android:summary="@string/version_name"/>
+        <PreferenceScreen android:title="@string/email"
+            android:key="email"
+            android:summary="@string/email_summary"/>
+
+
+
+    </PreferenceCategory>
+
+
+
+
+</PreferenceScreen>

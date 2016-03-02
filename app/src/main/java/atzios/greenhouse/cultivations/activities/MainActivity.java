@@ -43,6 +43,8 @@ import atzios.greenhouse.cultivations.fragments.FragmentWorks;
  * Created by Atzios on 2/08/2015.
  */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private final String CLASS_TAG = "MainActivity";
+
     /* Στατικες προκαθορισμενες μεταβλητες του συστηματος μας */
     public static final int REQUEST_NEW_GREENHOUSE = 20;
     private static final long DRAWER_CLOSE_DELAY_MS = 350;
@@ -220,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void navigate(final int itemId) {
         /* Ενημερωνουμε ποιο fragment ειναι το επιλεγμένο,δεν επιλέγετε ποτε τα jobs_cultivation
          * , και τα settings γιατι δεν ειναι menu fragments. */
-        if(itemId != R.id.drawer_jobs_cult_types) {
+        if(itemId != R.id.drawer_jobs_cult_types && itemId != R.id.drawer_settings) {
             navigationView.getMenu().findItem(itemId).setChecked(true);
             mNavItemId = itemId;
         }
@@ -248,6 +250,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.drawer_jobs_cult_types:
                 Intent jobCult = new Intent(this,JobsAndCultActivity.class);
                 startActivity(jobCult);
+                break;
+            case R.id.drawer_settings:
+                Intent settings = new Intent(this,SettingsActivity.class);
+                startActivity(settings);
                 break;
             default:
                 break;

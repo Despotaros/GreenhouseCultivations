@@ -14,9 +14,11 @@ public class Preferences {
      */
     public final static String FIRST_RUN = "first_run";
     /**
-     * Τιμη που αναφερεται στο αν εχουμε διξει στον χρηστη το πλευρικο συρταρι
+     * Τιμη που αναφερεται στο αν εχουμε δειξει στον χρηστη το πλευρικο συρταρι
      */
     public final static String DRAWER_STATE = "drawer_state";
+    public final static String DAYS_BEFORE_NOTIFY = "days_before_notify";
+    public final static String NOTIFICATIONS_STATUS = "notification_status";
     /**
      * Το ονομα του αρχειου οπου θα αποθηκευονται η ρυθμισεις μας
      */

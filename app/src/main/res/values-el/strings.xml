@@ -72,5 +72,15 @@
     <string name="pick_date">Επιλέξτε ημερομηνία</string>
     <string name="set">Θέσε</string>
     <string name="not_selected">Δέν επιλέχθηκε&#8230;</string>
+    <string name="about">Σχετικά με</string>
+    <string name="version">Έκδοση</string>
+    <string name="notifications_settings">Ρυθμίσεις ειδοποιήσεων </string>
+    <string name="notifications">Ειδοποιήσεις</string>
+    <string name="notifications_summary">Ενεργοποιεί ή απενεργοποιεί τις ειδοποιήσεις</string>
+    <string name="data">Δεδομένα</string>
+    <string name="delete_data">Διαγραφή δεδομένων</string>
+    <string name="delete_data_summary">Διαγράφει όλα τα δεδομέναν της εφαρμογής</string>
+    <string name="day_offset">Μέρες πρωτού ολοκληρωθούν</string>
+    <string name="day_offset_summary">Ορίστε πόσες μέρες πρώτου ολοκληρωθεί μία καλλιέργεια να ειδοποιηθήτε</string>
 
 </resources>

@@ -79,5 +79,18 @@
   <string name="not_selected">Not selected&#8230;</string>
   <string name="on">On</string>
   <string name="permission_denied" translatable="false">Permission denied! Grand the permission first.</string>
+  <string name="about">About</string>
+  <string name="version">Version</string>
+  <string name="version_name" translatable="false">1.0.0</string>
+  <string name="email" translatable="false">Email</string>
+  <string name="email_summary" translatable="false">Atzios</string>
+  <string name="notifications_settings">Notifications settings</string>
+  <string name="notifications">Notifications</string>
+  <string name="notifications_summary">Enables or disables notifications</string>
+  <string name="data">Data</string>
+  <string name="delete_data">Delete data</string>
+  <string name="delete_data_summary">Deletes all data of the application</string>
+  <string name="day_offset">Days before completed</string>
+  <string name="day_offset_summary">Set the days before a cultivation completes to get notify</string>
 
 </resources>

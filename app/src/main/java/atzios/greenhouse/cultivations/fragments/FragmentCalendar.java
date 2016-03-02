@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -58,6 +59,10 @@ public class FragmentCalendar extends Fragment {
         DataHelperWork dWork = new DataHelperWork(getActivity());
         works.addAll(dWork.getAll(Greenhouse.getInstance().getContent().getId(),true));
         works.addAll(dWork.getAll(Greenhouse.getInstance().getContent().getId(),false));
+
+
+      //  Log.e("PendingWork",Integer.toString(dWork.getPendingWorks().size()));
+        Log.e("PendingCult",Integer.toString(dHelper.getAlmostCompletedWorks(Greenhouse.getInstance().getContent().getId(),5).size()));
 
 
     }
