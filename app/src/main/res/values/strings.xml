@@ -65,7 +65,7 @@
   <string name="cultivation">Cultivation</string>
   <string name="date">Date</string>
   <string name="duration">Duration</string>
-  <string name="hint_duration">Enter duration in months</string>
+  <string name="hint_duration">Enter duration in days</string>
   <string name="yes">Yes</string>
   <string name="confirm_delete">Are you sure you want to delete it?</string>
   <string name="edit_cultivation">Edit cultivation</string>
@@ -76,7 +76,7 @@
   <string name="greenhouse_empty_name">Greenhouse name cannot be empty!!!</string>
   <string name="select_cultivation_type">Select cultivation type first!!!</string>
   <string name="select_job_type">Select what job you will perform first.</string>
-  <string name="not_selected">Not selected...</string>
+  <string name="not_selected">Not selected&#8230;</string>
   <string name="on">On</string>
   <string name="permission_denied" translatable="false">Permission denied! Grand the permission first.</string>
 

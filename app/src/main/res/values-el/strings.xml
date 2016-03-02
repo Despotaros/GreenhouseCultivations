@@ -8,7 +8,6 @@
     <string name="calendar">Ημερολόγιο</string>
     <string name="cancel">Άκυρο</string>
     <string name="cd_logo">Λογότυπο</string>
-    <string name="close"></string>
     <string name="comments">Σχόλια</string>
     <string name="completed">Ολοκληρωμένες</string>
     <string name="create">Δημιουργία</string>
@@ -63,9 +62,8 @@
     <string name="edit_cultivation">Τροποποίηση καλλιέργιας</string>
     <string name="edit_work">Τροποποίηση εργασίας</string>
     <string name="greenhouse_empty_name">Το όνομα του θερμοκηπίου δεν μπορεί να είναι κενό!!!</string>
-    <string name="hint_duration">Διάρκεια καλλιέργιας σε μήνες</string>
+    <string name="hint_duration">Διάρκεια καλλιέργιας σε μέρες</string>
     <string name="new_work">Νέα εργασία</string>
-    <string name="open"></string>
     <string name="on">Σε</string>
     <string name="yes">Ναί</string>
     <string name="pending">Εκκρεμούν</string>
@@ -73,6 +71,6 @@
     <string name="select_cultivation_type">Επιλέξτε είδος καλλιέργειας πρώτα.</string>
     <string name="pick_date">Επιλέξτε ημερομηνία</string>
     <string name="set">Θέσε</string>
-    <string name="not_selected">Δέν επιλέχθηκε...</string>
+    <string name="not_selected">Δέν επιλέχθηκε&#8230;</string>
 
 </resources>
