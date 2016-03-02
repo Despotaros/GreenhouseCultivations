@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 
@@ -17,6 +19,7 @@ import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
  * Created by Atzios on 22/12/2014.
  */
 public class DataHelperGreenhouseCultivation {
+    private final String CLASS_TAG = "DataHelperGreenCult";
     private Context context;
 
     /**
@@ -43,10 +46,33 @@ public class DataHelperGreenhouseCultivation {
             db.close();
         }
         catch (SQLiteException e) {
-            Log.e("GreenhouseCultivation",e.getMessage());
+            Log.e(CLASS_TAG , "create:"+e.getMessage());
         }
     }
 
+    /**
+     * Επιστρεφει ολες τις ενεργες καλλιεργειες οπου ειναι σχεδον ετοιμες να ολοκληρωθουν
+     * @param greenhouseId το id του θερμοκηπιου
+     * @param dayOffset Μερες πρωτου ολοκληρωθουν
+     * @return Τις καλλιεργειες
+     */
+    public ArrayList<ContentGreenhouseCultivation> getAlmostCompletedWorks(int greenhouseId,int dayOffset) {
+        ArrayList<ContentGreenhouseCultivation> gCults = getAll(greenhouseId,true);
+        ArrayList<ContentGreenhouseCultivation> almostCults = new ArrayList<>();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE,dayOffset);
+        for(ContentGreenhouseCultivation c : gCults) {
+            Calendar cCalendar = Calendar.getInstance();
+            cCalendar.setTime(new Date(c.getDate()));
+            cCalendar.add(Calendar.DATE,c.getDuration());
+            if(cCalendar.compareTo(calendar)<=0) {
+                almostCults.add(c);
+            }
+        }
+        return almostCults;
+
+    }
     /**
      * Επιστρεφει μια καλλιεργεια με το συγκεκριμενο id
      * @param id το id
@@ -54,20 +80,25 @@ public class DataHelperGreenhouseCultivation {
      */
     public ContentGreenhouseCultivation get(int id) {
         ContentGreenhouseCultivation content = new ContentGreenhouseCultivation();
-        SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
-        String query = "select * from GREENHOUSE_CULTIVATION where id="+id;
-        Cursor cursor = db.rawQuery(query,null);
-        if(cursor.moveToFirst()) {
-            content.setId(id);
-            content.setGreenhouseId(cursor.getInt(1));
-            content.setCultivationId(cursor.getInt(2));
-            content.setDate(cursor.getLong(3));
-            content.setDuration(cursor.getInt(4));
-            content.setComments(cursor.getString(5));
-            content.setActive(cursor.getInt(6));
+        try {
+            SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
+            String query = "select * from GREENHOUSE_CULTIVATION where id=" + id;
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                content.setId(id);
+                content.setGreenhouseId(cursor.getInt(1));
+                content.setCultivationId(cursor.getInt(2));
+                content.setDate(cursor.getLong(3));
+                content.setDuration(cursor.getInt(4));
+                content.setComments(cursor.getString(5));
+                content.setActive(cursor.getInt(6));
+            }
+            cursor.close();
+            db.close();
         }
-        cursor.close();
-        db.close();
+        catch (SQLiteException e) {
+            Log.e(CLASS_TAG,"get:"+e.getMessage());
+        }
         return content;
     }
 
@@ -78,26 +109,32 @@ public class DataHelperGreenhouseCultivation {
      */
     public ArrayList<ContentGreenhouseCultivation> getAll(int greenhouseId,boolean active) {
         ArrayList<ContentGreenhouseCultivation> gCults = new ArrayList<>();
-        SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
-        String query = "select * from GREENHOUSE_CULTIVATION where GREENHOUSE_ID="+greenhouseId+
-                " and ACTIVE="+(active?1:0);
-        Cursor cursor = db.rawQuery(query,null);
-        if(cursor.moveToFirst()) {
-            do {
-                ContentGreenhouseCultivation content = new ContentGreenhouseCultivation();
-                content.setId(cursor.getInt(0));
-                content.setGreenhouseId(cursor.getInt(1));
-                content.setCultivationId(cursor.getInt(2));
-                content.setDate(cursor.getLong(3));
-                content.setDuration(cursor.getInt(4));
-                content.setComments(cursor.getString(5));
-                content.setActive(cursor.getInt(6));
-                gCults.add(content);
+        try {
+            SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
+            String query = "select * from GREENHOUSE_CULTIVATION where GREENHOUSE_ID=" + greenhouseId +
+                    " and ACTIVE=" + (active ? 1 : 0);
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    ContentGreenhouseCultivation content = new ContentGreenhouseCultivation();
+                    content.setId(cursor.getInt(0));
+                    content.setGreenhouseId(cursor.getInt(1));
+                    content.setCultivationId(cursor.getInt(2));
+                    content.setDate(cursor.getLong(3));
+                    content.setDuration(cursor.getInt(4));
+                    content.setComments(cursor.getString(5));
+                    content.setActive(cursor.getInt(6));
+                    gCults.add(content);
 
-            } while (cursor.moveToNext());
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
         }
-        cursor.close();
-        db.close();
+        catch (SQLiteException e) {
+            Log.e(CLASS_TAG,"getAll:"+e.getMessage());
+        }
+
 
 
         return gCults;
@@ -119,7 +156,7 @@ public class DataHelperGreenhouseCultivation {
             db.close();
         }
         catch (SQLiteException e) {
-            Log.e("GreenhouseCultivation",e.getMessage());
+            Log.e(CLASS_TAG,"update:"+e.getMessage());
         }
 
     }
@@ -136,7 +173,7 @@ public class DataHelperGreenhouseCultivation {
             db.close();
         }
         catch (SQLiteException e) {
-            e.printStackTrace();
+            Log.e(CLASS_TAG,"delete:"+e.getMessage());
         }
 
     }
