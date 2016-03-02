@@ -98,6 +98,7 @@ public class FragmentInfo extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /** Ελεγχουμε πρωτα αν εχουμε το δικαιωμα να διαβασουμε και να γραψουμε **/
                 if(PermissionManager.checkPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     dispatchTakePictureIntent();
                 }
@@ -112,17 +113,14 @@ public class FragmentInfo extends Fragment {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Dimiourgoume ton dialogo
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                //Titlos
-                builder.setTitle(R.string.update);
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.update);
                 View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_edit, (ViewGroup) mView, false);
                 builder.setView(view);
 
                 final EditText ed = (EditText) view.findViewById(R.id.editText);
                 ed.setHint(R.string.hint_greenhouse_name);
-                //ed.setText(greenhouse.getName());
                 builder.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -316,7 +314,7 @@ public class FragmentInfo extends Fragment {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Permission granted
-
+                    dispatchTakePictureIntent();
                 }
                 else //Toast a message to the user that permission denied(By him)
                     Toast.makeText(getActivity(),R.string.permission_denied,Toast.LENGTH_LONG).show();
@@ -334,22 +332,20 @@ public class FragmentInfo extends Fragment {
     private File createImageFile() throws IOException {
         // Create an image file name
        // String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-
-        String path = Environment.getExternalStorageDirectory().toString() + "/Greenouse cultivations/"+greenhouse.getId()+"-"+greenhouse.getName();
+        String path = Environment.getExternalStorageDirectory().toString() + "/Greenhouse cultivations/"+greenhouse.getId()+"-"+greenhouse.getName();
         File storageDir = new File(path) ;
         if(!storageDir.exists())
             storageDir.mkdirs();
         storageDir = new File(path+"/image.jpeg");
-        storageDir.createNewFile();
-        mCurrentImagePath = storageDir.getAbsolutePath();
-       //
+        if(storageDir.createNewFile())
+            mCurrentImagePath = storageDir.getAbsolutePath();
         return storageDir;
     }
     /**
      * Αν τραβηξαμε σωστα την φωτογραφεια ενημερωσε την εικονα στην βαση, και στο drawer
-     * @param requestCode
+     * @param requestCode Ο κωδικος της εκκινησης
      * @param resultCode Ο κωδικος του αποτελεσματος
-     * @param data
+     * @param data Τα επιστεφομενα δεδομενα
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
