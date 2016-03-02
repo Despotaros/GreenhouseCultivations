@@ -8,6 +8,7 @@ import android.util.Log;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
@@ -18,6 +19,7 @@ import atzios.greenhouse.cultivations.contents.ContentWork;
  * Created by Panos on 22/12/2014.
  */
 public class DataHelperWork {
+    private final String CLASS_TAG = "DataHelperWork";
     private Context context;
     public DataHelperWork(Context context) {
         this.context = context;
@@ -48,10 +50,49 @@ public class DataHelperWork {
             db.close();
         }
         catch (SQLiteException e) {
-            Log.e("DataHelperWork",e.getMessage());
+            Log.e(CLASS_TAG,"get:"+e.getMessage());
         }
 
         return work;
+    }
+
+    /**
+     * Επιστρεφει ολες τις εργασιες που εκκρεμουν μεχρι την σημερινη ημερομηνια
+     * @param greenhouseId Το id του θερμοκηπιου
+     * @return Πινακας με τις εργασιες
+     */
+    public ArrayList<ContentWork> getPendingWorks(int greenhouseId) {
+        ArrayList<ContentWork> pending = new ArrayList<>();
+        try {
+
+            SQLiteDatabase db = new DatabaseOpenHelper(context).getReadableDatabase();
+            String query = "select * from WORK where GREENHOUSE_ID ="+greenhouseId+" and pending = 1 and date <="
+                    + Calendar.getInstance().getTime().getTime();
+            Cursor c = db.rawQuery(query,null);
+            c.moveToFirst();
+            do {
+                ContentWork content = new ContentWork();
+                content.setId(c.getInt(0));
+                content.setUserId(c.getInt(1));
+                content.setGreenhouseId(c.getInt(2));
+                content.setCultivationId(c.getInt(3));
+                content.setJobId(c.getInt(4));
+                content.setPending(c.getInt(5));
+                content.setDate(c.getLong(6));
+                content.setComments(c.getString(7));
+
+                pending.add(content);
+
+            } while (c.moveToNext());
+
+            c.close();
+            db.close();
+        }
+        catch (SQLiteException e) {
+            Log.e(CLASS_TAG,"getPendingWorks:"+e.getMessage());
+        }
+
+        return pending;
     }
     /**
      * Δημιουργουμε μια νεα εργασια ενος θερμοκηπιου
@@ -69,46 +110,51 @@ public class DataHelperWork {
             db.close();
         }
         catch (SQLiteException e) {
-            Log.e("GreenhouseCultivation",e.getMessage());
+            Log.e(CLASS_TAG,"create:"+e.getMessage());
         }
     }
 
     /**
      * Επιστρεφει ολες τις εργασιες ενος θερμοκηπιου
      * @param greenhouseId το id του θερμοκηπιου
-     * @param pending Η εργασιες που εκρεμουν
-     * @return ολες η καλλιεργειες σε ενα arraylist
+     * @param pending Οι εργασιες που εκκρεμουν
+     * @return ολες οι καλλιεργειες
      */
     public ArrayList<ContentWork> getAll(int greenhouseId,boolean pending) {
         ArrayList<ContentWork> gWorks = new ArrayList<>();
-        SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
-        String query = "select * from WORK where GREENHOUSE_ID="+greenhouseId+
-                " and PENDING="+(pending?1:0);
-        Cursor cursor = db.rawQuery(query,null);
-        if(cursor.moveToFirst()) {
-            do {
-                ContentWork content = new ContentWork();
-                content.setId(cursor.getInt(0));
-                content.setUserId(cursor.getInt(1));
-                content.setGreenhouseId(cursor.getInt(2));
-                content.setCultivationId(cursor.getInt(3));
-                content.setJobId(cursor.getInt(4));
-                content.setPending(cursor.getInt(5));
-                content.setDate(cursor.getLong(6));
-                content.setComments(cursor.getString(7));
+        try {
+            SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
+            String query = "select * from WORK where GREENHOUSE_ID=" + greenhouseId +
+                    " and PENDING=" + (pending ? 1 : 0);
+            Cursor cursor = db.rawQuery(query, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    ContentWork content = new ContentWork();
+                    content.setId(cursor.getInt(0));
+                    content.setUserId(cursor.getInt(1));
+                    content.setGreenhouseId(cursor.getInt(2));
+                    content.setCultivationId(cursor.getInt(3));
+                    content.setJobId(cursor.getInt(4));
+                    content.setPending(cursor.getInt(5));
+                    content.setDate(cursor.getLong(6));
+                    content.setComments(cursor.getString(7));
 
-                gWorks.add(content);
+                    gWorks.add(content);
 
-            } while (cursor.moveToNext());
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            db.close();
         }
-        cursor.close();
-        db.close();
+        catch (SQLiteException e) {
+            Log.e(CLASS_TAG,"getAll:"+e.getMessage());
+        }
         return gWorks;
     }
 
 
     /**
-     * Ενημερωνη την καλλιεργεια θερμοκηπιου
+     * Ενημερωνει την καλλιεργεια θερμοκηπιου
      * @param work  η καλλιεργεια
      */
     public void update(ContentWork work) {
@@ -124,7 +170,7 @@ public class DataHelperWork {
             db.close();
         }
         catch (SQLiteException e) {
-            Log.e("DataHelperWork",e.getMessage());
+            Log.e(CLASS_TAG,"update:"+e.getMessage());
         }
 
     }
@@ -141,7 +187,7 @@ public class DataHelperWork {
             db.close();
         }
         catch (SQLiteException e) {
-            e.printStackTrace();
+            Log.e(CLASS_TAG,"delete:"+e.getMessage());
         }
 
     }
