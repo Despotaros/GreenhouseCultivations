@@ -139,6 +139,8 @@ public class FragmentCompletedWorks extends Fragment {
             String comments = cultHelper.get(cult.getCultivationId()).getComments();
             if(name == null || name.equals(""))
                 name = context.getText(R.string.not_selected).toString();
+            if(comments == null || comments.equals(""))
+                comments = " ";
             holder.cult.setText(context.getText(R.string.on)+":"+name +" - "+comments);
             holder.comments.setText(context.getText(R.string.comments) + ":" + (contents.get(position).getComments()));
 

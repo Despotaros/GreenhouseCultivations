@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 
@@ -219,6 +220,32 @@ public class FragmentInfo extends Fragment {
             public void onClick(View v) {
                 if (listener != null)
                     listener.onFragmentFocus(R.id.drawer_work);
+            }
+        });
+
+        FloatingActionButton fab =  (FloatingActionButton) mView.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(R.string.delete);
+                builder.setMessage(R.string.confirm_delete);
+                builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DataHelperGreenhouse gHelper = new DataHelperGreenhouse(getActivity());
+                        if(gHelper.getNames().size() > 1) {
+                            gHelper.delete(Greenhouse.getInstance().getContent().getId(),true);
+                            loadData();
+                            updateGreenhouse();
+                            if (listener != null)
+                                listener.onNameUpdated();
+                        }
+
+                    }
+                });
+                builder.setNegativeButton(R.string.cancel,null);
+                builder.create().show();
             }
         });
     }

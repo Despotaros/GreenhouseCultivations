@@ -110,9 +110,15 @@ public class DataHelperGreenhouseCultivation {
     public ArrayList<ContentGreenhouseCultivation> getAll(int greenhouseId,boolean active) {
         ArrayList<ContentGreenhouseCultivation> gCults = new ArrayList<>();
         try {
+            String subQ = "";
+            if(greenhouseId == -1)
+                subQ = "where ACTIVE="+(active ? 1 : 0);
+            else
+                subQ = "where GREENHOUSE_ID="+greenhouseId+" and ACTIVE="+ (active ? 1 : 0);
+
+
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
-            String query = "select * from GREENHOUSE_CULTIVATION where GREENHOUSE_ID=" + greenhouseId +
-                    " and ACTIVE=" + (active ? 1 : 0);
+            String query = "select * from GREENHOUSE_CULTIVATION "+subQ;
             Cursor cursor = db.rawQuery(query, null);
             if (cursor.moveToFirst()) {
                 do {

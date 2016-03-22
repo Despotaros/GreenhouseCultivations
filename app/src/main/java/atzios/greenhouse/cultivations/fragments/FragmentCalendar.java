@@ -1,6 +1,7 @@
 package atzios.greenhouse.cultivations.fragments;
 
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.graphics.AvoidXfermode;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -53,12 +55,12 @@ public class FragmentCalendar extends Fragment {
         works = new ArrayList<>();
 
         DataHelperGreenhouseCultivation dHelper = new DataHelperGreenhouseCultivation(getActivity());
-        cultivations.addAll(dHelper.getAll(Greenhouse.getInstance().getContent().getId(),true));
-        cultivations.addAll(dHelper.getAll(Greenhouse.getInstance().getContent().getId(),false));
+        cultivations.addAll(dHelper.getAll(-1,true));
+        cultivations.addAll(dHelper.getAll(-1,false));
 
         DataHelperWork dWork = new DataHelperWork(getActivity());
-        works.addAll(dWork.getAll(Greenhouse.getInstance().getContent().getId(),true));
-        works.addAll(dWork.getAll(Greenhouse.getInstance().getContent().getId(),false));
+        works.addAll(dWork.getAll(-1,true));
+        works.addAll(dWork.getAll(-1,false));
 
 
       //  Log.e("PendingWork",Integer.toString(dWork.getPendingWorks().size()));
@@ -125,6 +127,17 @@ public class FragmentCalendar extends Fragment {
         calendar.init(lastYear.getTime(), nextYear.getTime());
         calendar.highlightDates(dates);
 
+        calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(Date date) {
+                showDateContent(date).show();
+            }
+
+            @Override
+            public void onDateUnselected(Date date) {
+
+            }
+        });
 
         if(goToNow)
             calendar.scrollToDate(Calendar.getInstance().getTime());
@@ -133,7 +146,14 @@ public class FragmentCalendar extends Fragment {
 
 
     }
+    private Dialog showDateContent(Date date) {
+        java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(dateFormat.format(date));
 
+        return builder.create();
+
+    }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_calendar,menu);

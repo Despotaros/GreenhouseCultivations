@@ -151,7 +151,7 @@ public class NewWorkActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position >0)
-                work.setCultivationId(cultivations.get(position-1).getId());
+                    work.setCultivationId(cultivations.get(position-1).getId());
             }
 
             @Override

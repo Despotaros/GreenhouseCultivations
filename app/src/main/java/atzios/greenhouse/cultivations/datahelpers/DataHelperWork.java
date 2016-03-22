@@ -64,9 +64,13 @@ public class DataHelperWork {
     public ArrayList<ContentWork> getPendingWorks(int greenhouseId) {
         ArrayList<ContentWork> pending = new ArrayList<>();
         try {
-
+            String subQ = "";
+            if(greenhouseId == -1)
+                subQ = "where pending=1 ";
+            else
+                subQ = "where GREENHOUSE_ID="+greenhouseId+" and pending=1 ";
             SQLiteDatabase db = new DatabaseOpenHelper(context).getReadableDatabase();
-            String query = "select * from WORK where GREENHOUSE_ID ="+greenhouseId+" and pending = 1 and date <="
+            String query = "select * from WORK "+subQ+" and date <="
                     + Calendar.getInstance().getTime().getTime();
             Cursor c = db.rawQuery(query,null);
             c.moveToFirst();
@@ -116,16 +120,20 @@ public class DataHelperWork {
 
     /**
      * Επιστρεφει ολες τις εργασιες ενος θερμοκηπιου
-     * @param greenhouseId το id του θερμοκηπιου
+     * @param greenhouseId το id του θερμοκηπιου ενα ειναι -1 επιστρεφει απο ολα τα θερμοκηπια
      * @param pending Οι εργασιες που εκκρεμουν
      * @return ολες οι καλλιεργειες
      */
     public ArrayList<ContentWork> getAll(int greenhouseId,boolean pending) {
         ArrayList<ContentWork> gWorks = new ArrayList<>();
         try {
+            String subQ = "";
+            if(greenhouseId == -1)
+                subQ = "where PENDING="+(pending ? 1 : 0);
+            else
+                subQ = "where GREENHOUSE_ID="+greenhouseId+" and PENDING="+(pending ? 1 : 0);
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
-            String query = "select * from WORK where GREENHOUSE_ID=" + greenhouseId +
-                    " and PENDING=" + (pending ? 1 : 0);
+            String query = "select * from WORK "+subQ;
             Cursor cursor = db.rawQuery(query, null);
             if (cursor.moveToFirst()) {
                 do {

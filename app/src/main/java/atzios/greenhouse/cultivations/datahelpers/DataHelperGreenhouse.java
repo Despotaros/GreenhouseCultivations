@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -18,8 +19,8 @@ import atzios.greenhouse.cultivations.contents.ContentGreenhouseReport;
  * Created by Atzios Vasilis on 22/12/2014.
  */
 public class DataHelperGreenhouse {
+    private final String CLASS_TAG = "DataHelperGreenhouse";
     private Context context;
-
     public DataHelperGreenhouse(Context context) {
         this.context = context ;
     }
@@ -145,7 +146,27 @@ public class DataHelperGreenhouse {
         }
 
     }
+    public boolean delete(int id,boolean all) {
+        boolean deleted = false;
+        try {
+            SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
+            String query = "delete from GREENHOUSE where ID="+id;
+            db.execSQL(query);
+            if(all) {
+                query = "delete from GREENHOUSE_CULTIVATION where GREENHOUSE_ID="+id;
+                db.execSQL(query);
+                query = "delete from WORK where GREENHOUSE_ID="+id;
+                db.execSQL(query);
+            }
+            db.close();
+            deleted = true;
+        }
+        catch (SQLiteException e) {
+            Log.e(CLASS_TAG,e.getMessage());
+        }
 
+        return deleted;
+    }
     /**
      * Synartish opou mas epistrefei thn anafora kaliergiwn kai ergasiwn enos thermokipiou
      * @param id To id tou themokipiou
