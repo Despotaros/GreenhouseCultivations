@@ -25,6 +25,7 @@ public class FragmentPendingWorks extends Fragment {
     public final static String TAG = "FragmentPendingWorks";
     private ArrayList<ContentWork> works = new ArrayList<>();
     private View mView;
+    private OnFragmentInvalidated callback;
 
 
     @Nullable
@@ -38,6 +39,9 @@ public class FragmentPendingWorks extends Fragment {
         /* Καθε φορα που το fragment γινεται active ενημερωσε το listview για τυχον αλλαγες */
         loadData();
     }
+    public void setOnFragmentInvalidated(OnFragmentInvalidated listener) {
+        callback = listener;
+    }
     public void refresh() {
         loadData();
     }
@@ -46,7 +50,7 @@ public class FragmentPendingWorks extends Fragment {
      * Ενημερωνει την lista με τα ειδη εργασιων απο την βαση
      */
     private void loadData() {
-        DataHelperWork dHelper = new DataHelperWork(getActivity());
+        final DataHelperWork dHelper = new DataHelperWork(getActivity());
         works = dHelper.getAll(Greenhouse.getInstance().getContent().getId(),true,-1);
         ListView listView = (ListView)mView.findViewById(R.id.lsPendingWorks);
         FragmentCompletedWorks.ContentWorkListAdapter adapter = new FragmentCompletedWorks.ContentWorkListAdapter(getActivity(),R.layout.list_item_work,works);
@@ -61,7 +65,20 @@ public class FragmentPendingWorks extends Fragment {
                 startActivity(intent);
             }
         });
+        adapter.setCallbackListener(new FragmentCompletedWorks.ContentWorkListAdapter.OnImageClicked() {
+            @Override
+            public void onImageClicked(int pos) {
+                works.get(pos).setPending(false);
+                dHelper.update(works.get(pos));
+                if(callback!=null)
+                    callback.invalidated();
+            }
+        });
 
+    }
+
+    public interface OnFragmentInvalidated {
+         void invalidated();
     }
 
 }

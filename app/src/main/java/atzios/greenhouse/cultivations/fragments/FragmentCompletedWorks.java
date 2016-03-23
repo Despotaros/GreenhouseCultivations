@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -35,12 +36,16 @@ public class FragmentCompletedWorks extends Fragment {
     public final static String TAG = "FragmentCompletedWorks";
     private ArrayList<ContentWork> works = new ArrayList<>();
     private View mView;
+    private FragmentPendingWorks.OnFragmentInvalidated callback;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return mView = inflater.inflate(R.layout.fragment_completed_works,container,false);
+    }
+    public void setOnFragmentInvalidated(FragmentPendingWorks.OnFragmentInvalidated listener) {
+        callback = listener;
     }
     @Override
     public void onResume() {
@@ -56,7 +61,7 @@ public class FragmentCompletedWorks extends Fragment {
      * Ενημερωνει την lista με τα ειδη εργασιων απο την βαση
      */
     private void loadData() {
-        DataHelperWork dHelper = new DataHelperWork(getActivity());
+        final DataHelperWork dHelper = new DataHelperWork(getActivity());
         works = dHelper.getAll(Greenhouse.getInstance().getContent().getId(),false,-1);
         ListView listView = (ListView)mView.findViewById(R.id.lsCompletedWorks);
         ContentWorkListAdapter adapter = new ContentWorkListAdapter(getActivity(),R.layout.list_item_work,works);
@@ -72,6 +77,17 @@ public class FragmentCompletedWorks extends Fragment {
             }
         });
 
+        adapter.setCallbackListener(new ContentWorkListAdapter.OnImageClicked() {
+            @Override
+            public void onImageClicked(int pos) {
+                works.get(pos).setPending(true);
+                dHelper.update(works.get(pos));
+                if(callback!=null)
+                    callback.invalidated();
+
+            }
+        });
+
     }
 
 
@@ -82,6 +98,11 @@ public class FragmentCompletedWorks extends Fragment {
         private int resLayoutID;
         private Context context;
         ArrayList<ContentWork> contents;
+        private OnImageClicked callback;
+
+        public void setCallbackListener(OnImageClicked listener) {
+            callback = listener;
+        }
 
         //Constructor
         public ContentWorkListAdapter(Context context, int layoutID, ArrayList<ContentWork> contents) {
@@ -123,6 +144,7 @@ public class FragmentCompletedWorks extends Fragment {
                 holder.comments = (CustomTextView) row.findViewById(R.id.tvComments);
                 holder.date = (CustomTextView) row.findViewById(R.id.tvDate);
                 holder.cult = (CustomTextView) row.findViewById(R.id.tvCult);
+                holder.imgButton = (ImageView) row.findViewById(R.id.imgActive);
 
 
                 row.setTag(holder);
@@ -147,10 +169,24 @@ public class FragmentCompletedWorks extends Fragment {
             DataHelperJob helperJob = new DataHelperJob(context);
             holder.job.setText(helperJob.get(contents.get(position).getJobId()).getName() +" - " +
                     helperJob.get(contents.get(position).getJobId()).getComments());
-            Calendar calendar = Calendar.getInstance();
+            final Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date(contents.get(position).getDate()));
             java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
             holder.date.setText(context.getText(R.string.date) + ":" + dateFormat.format(calendar.getTime()));
+
+            if(contents.get(position).isPending()) {
+                holder.imgButton.setImageResource(R.drawable.ok);
+            }
+            else
+                holder.imgButton.setImageResource(R.drawable.not);
+
+            holder.imgButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(callback!=null)
+                        callback.onImageClicked(position);
+                }
+            });
 
             return row;
 
@@ -163,6 +199,11 @@ public class FragmentCompletedWorks extends Fragment {
             CustomTextView date;
             CustomTextView job;
             CustomTextView comments;
+            ImageView imgButton;
+        }
+
+        public interface OnImageClicked {
+            void onImageClicked(int pos);
         }
     }
 }

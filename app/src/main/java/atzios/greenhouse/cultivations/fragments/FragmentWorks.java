@@ -59,9 +59,22 @@ public class FragmentWorks extends Fragment {
 
         mViewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(),getActivity());
 
-
-        mViewPagerAdapter.addFragment(new FragmentPendingWorks(), FragmentPendingWorks.TAG, getText(R.string.pending).toString());
-        mViewPagerAdapter.addFragment(new FragmentCompletedWorks(), FragmentCompletedWorks.TAG, getText(R.string.completed).toString());
+        FragmentPendingWorks pendingWorks = new FragmentPendingWorks();
+        pendingWorks.setOnFragmentInvalidated(new FragmentPendingWorks.OnFragmentInvalidated() {
+            @Override
+            public void invalidated() {
+                refresh();
+            }
+        });
+        FragmentCompletedWorks completedWorks = new FragmentCompletedWorks();
+        completedWorks.setOnFragmentInvalidated(new FragmentPendingWorks.OnFragmentInvalidated() {
+            @Override
+            public void invalidated() {
+                refresh();
+            }
+        });
+        mViewPagerAdapter.addFragment(pendingWorks, FragmentPendingWorks.TAG, getText(R.string.pending).toString());
+        mViewPagerAdapter.addFragment(completedWorks, FragmentCompletedWorks.TAG, getText(R.string.completed).toString());
 
         tabLayout = (TabLayout) mView.findViewById(R.id.sliding_tabs);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -69,6 +82,7 @@ public class FragmentWorks extends Fragment {
         tabLayout.setTabTextColors(getResources().getColor(R.color.drawer_item_text_default), Color.WHITE);
 
         mViewPager.setAdapter(mViewPagerAdapter);
+
         tabLayout.setupWithViewPager(mViewPager);
 
         mViewPager.setCurrentItem(0);

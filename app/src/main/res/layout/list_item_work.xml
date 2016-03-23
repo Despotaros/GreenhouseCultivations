@@ -58,6 +58,15 @@
                 android:layout_below="@+id/tvCult"
                 android:layout_alignLeft="@+id/tvCult"
                 android:layout_alignStart="@+id/tvCult" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/imgActive"
+                android:src="@drawable/ok"
+                android:layout_alignBottom="@+id/tvCult"
+                android:layout_alignRight="@+id/tvDate"
+                android:layout_alignEnd="@+id/tvDate" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -24,7 +24,7 @@ public class ContentWork {
         jobId = -1;
         greenhouseId = -1;
         cultivationId = -1;
-        pending = false;
+        pending = true;
 
     }
 
