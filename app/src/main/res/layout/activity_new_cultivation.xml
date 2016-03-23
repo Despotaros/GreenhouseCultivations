@@ -56,25 +56,16 @@
             android:layout_alignParentStart="true"
             android:layout_margin="5dp" />
         <atzios.greenhouse.cultivations.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/view2"
-            android:text="@string/pick_date"
-            android:textColor="@color/primaryText"
-            android:textSize="20sp"
-            android:layout_below="@+id/spCultNames"
-            android:layout_alignLeft="@+id/spCultNames"
-            android:layout_alignStart="@+id/spCultNames" />
-        <atzios.greenhouse.cultivations.CustomTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/view4"
-            android:text="@string/duration"
-            android:textColor="@color/primaryText"
-            android:textSize="20sp"
-            android:layout_below="@+id/cbActive"
-            android:layout_alignLeft="@+id/cbActive"
-            android:layout_alignStart="@+id/cbActive" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view2"
+        android:text="@string/date"
+        android:textColor="@color/primaryText"
+        android:textSize="20sp"
+        android:layout_below="@+id/spCultNames"
+        android:layout_alignLeft="@+id/spCultNames"
+        android:layout_alignStart="@+id/spCultNames" />
+
         <atzios.greenhouse.cultivations.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,9 +73,9 @@
             android:text="@string/comments"
             android:textColor="@color/primaryText"
             android:textSize="20sp"
-            android:layout_below="@+id/edDuration"
-            android:layout_alignLeft="@+id/view4"
-            android:layout_alignStart="@+id/view4" />
+            android:layout_alignLeft="@+id/edComments"
+            android:layout_alignStart="@+id/edComments"
+            android:layout_below="@+id/btnDate" />
 
         <Button
             android:layout_width="wrap_content"
@@ -94,41 +85,14 @@
             android:layout_below="@+id/view2"
             android:layout_centerHorizontal="true" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/active"
-            android:id="@+id/cbActive"
-            android:layout_below="@+id/btnDate"
-            android:layout_alignLeft="@+id/view2"
-            android:layout_alignStart="@+id/view2"
-            android:checked="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add"
+            android:text="@string/create"
             android:id="@+id/btnAdd"
             android:layout_alignBottom="@+id/spCultNames"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned"
-            android:ems="10"
-            android:id="@+id/edDuration"
-            android:layout_below="@+id/view4"
-            android:layout_alignRight="@+id/btnAdd"
-            android:layout_alignEnd="@+id/btnAdd"
-            android:layout_alignLeft="@+id/view4"
-            android:layout_alignStart="@+id/view4"
-            android:layout_margin="5dp"
-            android:singleLine="true"
-            android:hint="@string/hint_duration" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -139,10 +103,10 @@
             android:layout_below="@+id/view5"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/edDuration"
-            android:layout_alignEnd="@+id/edDuration"
             android:layout_margin="5dp"
-            android:hint="@string/hint_comments" />
+            android:hint="@string/hint_comments"
+            android:layout_alignRight="@+id/btnAdd"
+            android:layout_alignEnd="@+id/btnAdd" />
 
     </RelativeLayout>
         </ScrollView>

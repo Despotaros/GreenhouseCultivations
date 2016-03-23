@@ -74,6 +74,8 @@ public class NewCultivationActivity extends AppCompatActivity {
         loadData();
 
         final Button btn = (Button)findViewById(R.id.btnDate);
+        final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewCultivationActivity.this);
+        btn.setText(dateFormat.format(Calendar.getInstance().getTime().getTime()));
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,13 +88,13 @@ public class NewCultivationActivity extends AppCompatActivity {
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year,month,day,0,0,0);
                         calendar.set(Calendar.MILLISECOND,0);
-                        java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewCultivationActivity.this);
+                      //  java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewCultivationActivity.this);
                         btn.setText(dateFormat.format(calendar.getTime()));
-                        greenhouseCultivation.setDate(calendar.getTime().getTime());
+                        greenhouseCultivation.setStartDate(calendar.getTime().getTime());
 
                     }
                 });
-                dialogPickDate.create(greenhouseCultivation.getDate()).show();
+                dialogPickDate.create(greenhouseCultivation.getStartDate()).show();
             }
         });
 
@@ -120,19 +122,12 @@ public class NewCultivationActivity extends AppCompatActivity {
      * Δημιουργει την καλλιεργεια στην βαση
      */
     private void createGreenhouseCultivation() {
-        CheckBox cb = (CheckBox)findViewById(R.id.cbActive);
-        greenhouseCultivation.setGreenhouseId(Greenhouse.getInstance().getContent().getId());
-        greenhouseCultivation.setActive(cb.isChecked());
 
-        EditText ed = (EditText)findViewById(R.id.edDuration);
-        try {
-            greenhouseCultivation.setDuration(Integer.parseInt(ed.getText().toString()));
-        }
-        catch (NumberFormatException e) {
-            greenhouseCultivation.setDuration(-1);
-        }
-        if(greenhouseCultivation.getDate() == 0) {
-            greenhouseCultivation.setDate(Calendar.getInstance().getTime().getTime());
+        greenhouseCultivation.setGreenhouseId(Greenhouse.getInstance().getContent().getId());
+
+        EditText ed ;
+        if(greenhouseCultivation.getStartDate() == 0) {
+            greenhouseCultivation.setStartDate(Calendar.getInstance().getTime().getTime());
         }
         ed = (EditText)findViewById(R.id.edComments);
         greenhouseCultivation.setComments(ed.getText().toString());
@@ -162,11 +157,8 @@ public class NewCultivationActivity extends AppCompatActivity {
             DataHelperGreenhouseCultivation h = new DataHelperGreenhouseCultivation(this);
             greenhouseCultivation = h.get(cId);
 
-            CheckBox cb = (CheckBox)findViewById(R.id.cbActive);
-            cb.setChecked(greenhouseCultivation.isActive());
 
-            EditText ed = (EditText)findViewById(R.id.edDuration);
-            ed.setText(Integer.toString(greenhouseCultivation.getDuration()));
+            EditText ed;
 
             ed = (EditText)findViewById(R.id.edComments);
             ed.setText(greenhouseCultivation.getComments());
@@ -174,7 +166,7 @@ public class NewCultivationActivity extends AppCompatActivity {
             Button btn = (Button)findViewById(R.id.btnDate);
             java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewCultivationActivity.this);
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date(greenhouseCultivation.getDate()));
+            calendar.setTime(new Date(greenhouseCultivation.getStartDate()));
             btn.setText(dateFormat.format(calendar.getTime()));
         }
           /* Διαβασε ολα τα ειδη καλλιεργειων απο την βαση */

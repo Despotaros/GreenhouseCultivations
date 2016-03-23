@@ -10,21 +10,29 @@ public class ContentGreenhouseCultivation {
     private int id;
     private int greenhouseId;
     private int cultivationId;
-    private long date;
+    private long startDate;
+    private long endDate;
     private String comments;
     private boolean active;
-    private int duration;
+
 
 
     public ContentGreenhouseCultivation() {
         id = -1;
-        duration = 0;
+
         active = true;
         comments = "";
-        date = -1 ;
+        startDate = -1 ;
         cultivationId = -1;
         greenhouseId = -1;
 
+    }
+    public long getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(long endDate) {
+        this.endDate = endDate;
     }
 
     public int getId() {
@@ -51,12 +59,12 @@ public class ContentGreenhouseCultivation {
         this.cultivationId = cultivationId;
     }
 
-    public long getDate() {
-        return date;
+    public long getStartDate() {
+        return startDate;
     }
 
-    public void setDate(long date) {
-        this.date = date;
+    public void setStartDate(long startDate) {
+        this.startDate = startDate;
     }
 
     public String getComments() {
@@ -81,11 +89,5 @@ public class ContentGreenhouseCultivation {
         this.active = active;
     }
 
-    public int getDuration() {
-        return duration;
-    }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
 }

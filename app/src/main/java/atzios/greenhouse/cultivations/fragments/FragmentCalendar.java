@@ -3,8 +3,6 @@ package atzios.greenhouse.cultivations.fragments;
 
 import android.app.Dialog;
 import android.app.Fragment;
-import android.graphics.AvoidXfermode;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -64,7 +62,7 @@ public class FragmentCalendar extends Fragment {
 
 
       //  Log.e("PendingWork",Integer.toString(dWork.getPendingWorks().size()));
-        Log.e("PendingCult",Integer.toString(dHelper.getAlmostCompletedWorks(Greenhouse.getInstance().getContent().getId(),5).size()));
+       // Log.e("PendingCult",Integer.toString(dHelper.getAlmostCompletedWorks(Greenhouse.getInstance().getContent().getId(),5).size()));
 
 
     }
@@ -77,7 +75,7 @@ public class FragmentCalendar extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fab.setBackgroundTintMode(PorterDuff.Mode.DARKEN);
+               // fab.setBackgroundTintMode(PorterDuff.Mode.DARKEN);
 
                 //fab.showContextMenu();
             }
@@ -99,11 +97,11 @@ public class FragmentCalendar extends Fragment {
         long minDate = Calendar.getInstance().getTime().getTime() ;
         /** Βρισκουμε την μεγιστη και ελαχιστη ημερομηνια των εργασιων και των καλλιεργειων **/
         for(ContentGreenhouseCultivation c : cultivations) {
-            if(c.getDate() > maxDate)
-                maxDate = c.getDate();
-            if(c.getDate() < minDate)
-                minDate = c.getDate();
-            dates.add(new Date(c.getDate()));
+            if(c.getStartDate() > maxDate)
+                maxDate = c.getStartDate();
+            if(c.getStartDate() < minDate)
+                minDate = c.getStartDate();
+            dates.add(new Date(c.getStartDate()));
         }
         for(ContentWork w : works) {
             if(w.getDate() > maxDate)

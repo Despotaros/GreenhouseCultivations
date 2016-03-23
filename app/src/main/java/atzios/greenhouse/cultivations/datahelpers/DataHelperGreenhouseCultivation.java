@@ -38,8 +38,8 @@ public class DataHelperGreenhouseCultivation {
         try {
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
             String query = "insert into GREENHOUSE_CULTIVATION(GREENHOUSE_ID,CULTIVATION_ID,START_DATE," +
-                    "DURATION,COMMENTS,ACTIVE) values("+cultivation.getGreenhouseId()+","+cultivation.getCultivationId()+
-                    ","+cultivation.getDate()+","+cultivation.getDuration()+",'"+cultivation.getComments()
+                    "END_DATE,COMMENTS,ACTIVE) values("+cultivation.getGreenhouseId()+","+cultivation.getCultivationId()+
+                    ","+cultivation.getStartDate()+","+cultivation.getEndDate()+",'"+cultivation.getComments()
                     +"',"+cultivation.getActive()+")";
 
             db.execSQL(query);
@@ -51,26 +51,27 @@ public class DataHelperGreenhouseCultivation {
     }
 
     /**
-     * Επιστρεφει ολες τις ενεργες καλλιεργειες οπου ειναι σχεδον ετοιμες να ολοκληρωθουν
+     * Επιστρεφει ολες τις ενεργες καλλιεργειες οπου ειναι ετοιμες να ολοκληρωθουν
      * @param greenhouseId το id του θερμοκηπιου
-     * @param dayOffset Μερες πρωτου ολοκληρωθουν
+     * @param date Ημερομηνια που θα ολοκληρωθουν
      * @return Τις καλλιεργειες
      */
-    public ArrayList<ContentGreenhouseCultivation> getAlmostCompletedWorks(int greenhouseId,int dayOffset) {
-        ArrayList<ContentGreenhouseCultivation> gCults = getAll(greenhouseId,true);
+    public ArrayList<ContentGreenhouseCultivation> getAlmostCompletdedWorks(int greenhouseId,long date) {
+      /*  ArrayList<ContentGreenhouseCultivation> gCults = getAll(greenhouseId,true);
         ArrayList<ContentGreenhouseCultivation> almostCults = new ArrayList<>();
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE,dayOffset);
+        calendar.setTime(new Date(date));
+
         for(ContentGreenhouseCultivation c : gCults) {
             Calendar cCalendar = Calendar.getInstance();
-            cCalendar.setTime(new Date(c.getDate()));
+            cCalendar.setTime(new Date(c.getStartDate()));
             cCalendar.add(Calendar.DATE,c.getDuration());
             if(cCalendar.compareTo(calendar)<=0) {
                 almostCults.add(c);
             }
-        }
-        return almostCults;
+        } */
+        return null;
 
     }
     /**
@@ -88,8 +89,8 @@ public class DataHelperGreenhouseCultivation {
                 content.setId(id);
                 content.setGreenhouseId(cursor.getInt(1));
                 content.setCultivationId(cursor.getInt(2));
-                content.setDate(cursor.getLong(3));
-                content.setDuration(cursor.getInt(4));
+                content.setStartDate(cursor.getLong(3));
+                content.setEndDate(cursor.getLong(4));
                 content.setComments(cursor.getString(5));
                 content.setActive(cursor.getInt(6));
             }
@@ -126,8 +127,8 @@ public class DataHelperGreenhouseCultivation {
                     content.setId(cursor.getInt(0));
                     content.setGreenhouseId(cursor.getInt(1));
                     content.setCultivationId(cursor.getInt(2));
-                    content.setDate(cursor.getLong(3));
-                    content.setDuration(cursor.getInt(4));
+                    content.setStartDate(cursor.getLong(3));
+                    content.setEndDate(cursor.getLong(4));
                     content.setComments(cursor.getString(5));
                     content.setActive(cursor.getInt(6));
                     gCults.add(content);
@@ -154,7 +155,7 @@ public class DataHelperGreenhouseCultivation {
         try {
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
             String query = "update GREENHOUSE_CULTIVATION set CULTIVATION_ID="+cultivation.getCultivationId()+
-                    ",START_DATE="+cultivation.getDate()+",DURATION="+cultivation.getDuration()+
+                    ",START_DATE="+cultivation.getStartDate()+",END_DATE="+cultivation.getEndDate() +
                     ",COMMENTS='"+cultivation.getComments()+"',ACTIVE="+cultivation.getActive()
                     +" where id="+cultivation.getId();
 

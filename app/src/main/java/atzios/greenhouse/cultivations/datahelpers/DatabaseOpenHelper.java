@@ -39,7 +39,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             db.execSQL("create table CULTIVATION_CATEGORY(ID integer primary key autoincrement,CATEGORY_NAME text)");
             //Create greenhouse cultivations table
             db.execSQL("create table GREENHOUSE_CULTIVATION(ID integer primary key autoincrement,GREENHOUSE_ID integer,CULTIVATION_ID integer," +
-                    "START_DATE numeric,DURATION integer,COMMENTS text,ACTIVE integer)");
+                    "START_DATE numeric,END_DATE numeric,COMMENTS text,ACTIVE integer)");
             //Create Jobs table
             db.execSQL("create table JOB(ID integer primary key autoincrement,JOB_NAME text,COMMENTS text)");
             //Create Works table

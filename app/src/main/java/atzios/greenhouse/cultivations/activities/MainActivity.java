@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         /* Δημιουργουμε τα events της Main */
         drawerHeaderViewsEvents();
+
     }
 
     /**
@@ -187,11 +189,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 /* Ενημερωνουμε ποιο θερμοκηπιο ειναι το επιλεγμενο */
                 if (position < greenhouseContents.size()) {
+
                     gPos = position;
                     Greenhouse.getInstance().setContent(greenhouseContents.get(gPos));
                     Greenhouse.getInstance().setReport(dataHelperGreenhouse.getReport(greenhouseContents.get(gPos).getId()));
                     updateFragments();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
+                    getSupportActionBar().setTitle(Greenhouse.getInstance().getContent().getName());
                 }
             }
 
@@ -201,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
 
     /**
      * Ενημερωνουμε τα fragments οταν επιλεγετε νεο θερμοκηπιο
@@ -228,21 +233,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         switch (itemId) {
             case R.id.drawer_info:
-                getSupportActionBar().setTitle(R.string.greenhouse_info);
+                getSupportActionBar().setSubtitle(R.string.greenhouse_info);
+
                 getFragmentManager().beginTransaction().replace(R.id.content, storeFragmentManager.getFragment(FragmentInfo.TAG)).commit();
                 break;
             case R.id.drawer_calendar:
-                getSupportActionBar().setTitle(R.string.calendar);
+                getSupportActionBar().setSubtitle(R.string.calendar);
                 getFragmentManager().beginTransaction().replace(R.id.content, storeFragmentManager.getFragment(FragmentCalendar.TAG)).commit();
                 break;
             case R.id.drawer_cultivations:
-                getSupportActionBar().setTitle(R.string.cultivations);
+                getSupportActionBar().setSubtitle(R.string.cultivations);
                 storeFragmentManager.removeFragment(FragmentCultivations.TAG);
                 storeFragmentManager.addFragment(new FragmentCultivations(), FragmentCultivations.TAG, null);
                 getFragmentManager().beginTransaction().replace(R.id.content, storeFragmentManager.getFragment(FragmentCultivations.TAG)).commit();
                 break;
             case R.id.drawer_work:
-                getSupportActionBar().setTitle(R.string.works);
+                getSupportActionBar().setSubtitle(R.string.works);
                 storeFragmentManager.removeFragment(FragmentWorks.TAG);
                 storeFragmentManager.addFragment(new FragmentWorks(), FragmentWorks.TAG, null);
                 getFragmentManager().beginTransaction().replace(R.id.content, storeFragmentManager.getFragment(FragmentWorks.TAG)).commit();
@@ -297,7 +303,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if(mNavItemId == R.id.drawer_info )
+                super.onBackPressed();
+            else
+                navigate(R.id.drawer_info);
         }
     }
     @Override

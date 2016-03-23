@@ -60,7 +60,7 @@
   <string name="hint_cultivation_name">Enter cultivation\'s name</string>
   <string name="delete">Delete</string>
   <string name="new_cultivation">New cultivation</string>
-  <string name="pick_date">Pick date</string>
+
   <string name="set">Set</string>
   <string name="cultivation">Cultivation</string>
   <string name="date">Date</string>
@@ -92,5 +92,7 @@
   <string name="delete_data_summary">Deletes all data of the application</string>
   <string name="day_offset">Days before completed</string>
   <string name="day_offset_summary">Set the days before a cultivation completes to get notify</string>
+  <string name="pick_date">Pick date</string>
+  <string name="genera_works">Genere works</string>
 
 </resources>

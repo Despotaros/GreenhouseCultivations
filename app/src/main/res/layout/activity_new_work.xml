@@ -94,22 +94,12 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/add"
+                    android:text="@string/create"
                     android:id="@+id/btnAddJob"
                     android:layout_alignTop="@+id/spJobNames"
                     android:layout_alignRight="@+id/spCultNames"
                     android:layout_alignEnd="@+id/spCultNames" />
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pending"
-                    android:id="@+id/cbActive"
-                    android:checked="true"
-                    android:layout_below="@+id/btnDate"
-                    android:layout_alignLeft="@+id/view2"
-                    android:layout_alignStart="@+id/view2"
-                    android:layout_marginBottom="10dp" />
                 <atzios.greenhouse.cultivations.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,9 +107,9 @@
                     android:text="@string/comments"
                     android:textColor="@color/primaryText"
                     android:textSize="20sp"
-                    android:layout_below="@+id/cbActive"
-                    android:layout_alignLeft="@+id/cbActive"
-                    android:layout_alignStart="@+id/cbActive" />
+                    android:layout_below="@+id/btnDate"
+                    android:layout_alignLeft="@+id/view2"
+                    android:layout_alignStart="@+id/view2" />
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

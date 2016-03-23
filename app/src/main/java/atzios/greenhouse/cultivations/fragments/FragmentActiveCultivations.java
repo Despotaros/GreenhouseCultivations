@@ -115,7 +115,7 @@ public class FragmentActiveCultivations extends Fragment {
                 holder.cult = (CustomTextView) row.findViewById(R.id.tvCultivation);
                 holder.comments = (CustomTextView) row.findViewById(R.id.tvComments);
                 holder.date = (CustomTextView) row.findViewById(R.id.tvDate);
-                holder.duration = (CustomTextView) row.findViewById(R.id.tvDuration);
+                holder.completedDate = (CustomTextView) row.findViewById(R.id.tvDuration);
 
 
                 row.setTag(holder);
@@ -128,13 +128,10 @@ public class FragmentActiveCultivations extends Fragment {
             String name = cult.get(contents.get(position).getCultivationId()).getName();
             holder.cult.setText(name + "-" + cult.get(contents.get(position).getCultivationId()).getComments() );
             holder.comments.setText(context.getText(R.string.comments)+":"+(contents.get(position).getComments()));
-            int duration = contents.get(position).getDuration();
-            if(duration == -1)
-                holder.duration.setText(context.getText(R.string.duration)+": - ");
-            else
-                holder.duration.setText(context.getText(R.string.duration)+":"+duration);
+
+
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date(contents.get(position).getDate()));
+            calendar.setTime(new Date(contents.get(position).getStartDate()));
             java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(context);
 
             holder.date.setText(context.getText(R.string.date)+":"+dateFormat.format(calendar.getTime()));
@@ -148,7 +145,7 @@ public class FragmentActiveCultivations extends Fragment {
         static class ViewHolder {
             CustomTextView cult;
             CustomTextView date;
-            CustomTextView duration;
+            CustomTextView completedDate;
             CustomTextView comments;
         }
     }

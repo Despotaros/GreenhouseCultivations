@@ -82,5 +82,6 @@
     <string name="delete_data_summary">Διαγράφει όλα τα δεδομέναν της εφαρμογής</string>
     <string name="day_offset">Μέρες πρωτού ολοκληρωθούν</string>
     <string name="day_offset_summary">Ορίστε πόσες μέρες πρώτου ολοκληρωθεί μία καλλιέργεια να ειδοποιηθήτε</string>
+    <string name="genera_works">Γενικές εργασίες</string>
 
 </resources>
