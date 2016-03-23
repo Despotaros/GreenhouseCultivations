@@ -57,8 +57,8 @@ public class FragmentCalendar extends Fragment {
         cultivations.addAll(dHelper.getAll(-1,false));
 
         DataHelperWork dWork = new DataHelperWork(getActivity());
-        works.addAll(dWork.getAll(-1,true));
-        works.addAll(dWork.getAll(-1,false));
+        works.addAll(dWork.getAll(-1,true,-1));
+        works.addAll(dWork.getAll(-1,false,-1));
 
 
       //  Log.e("PendingWork",Integer.toString(dWork.getPendingWorks().size()));

@@ -213,11 +213,7 @@ public class NewWorkActivity extends AppCompatActivity {
             DataHelperWork helperWork = new DataHelperWork(this);
             work = helperWork.get(wId);
 
-            CheckBox cb = (CheckBox)findViewById(R.id.cbActive);
-            cb.setChecked(work.isPending());
-
             EditText ed ;
-
             ed = (EditText)findViewById(R.id.edComments);
             ed.setText(work.getComments());
 
@@ -266,9 +262,8 @@ public class NewWorkActivity extends AppCompatActivity {
      * Δημιουργει την εργασια στην βαση
      */
     private void createGreenhouseCultivation() {
-        CheckBox cb = (CheckBox)findViewById(R.id.cbActive);
+
         work.setGreenhouseId(Greenhouse.getInstance().getContent().getId());
-        work.setPending(cb.isChecked());
 
         EditText ed;
 

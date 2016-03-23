@@ -122,9 +122,10 @@ public class DataHelperWork {
      * Επιστρεφει ολες τις εργασιες ενος θερμοκηπιου
      * @param greenhouseId το id του θερμοκηπιου ενα ειναι -1 επιστρεφει απο ολα τα θερμοκηπια
      * @param pending Οι εργασιες που εκκρεμουν
+     * @param cultivationId Το id της καλλιεργειας
      * @return ολες οι καλλιεργειες
      */
-    public ArrayList<ContentWork> getAll(int greenhouseId,boolean pending) {
+    public ArrayList<ContentWork> getAll(int greenhouseId,boolean pending,int cultivationId) {
         ArrayList<ContentWork> gWorks = new ArrayList<>();
         try {
             String subQ = "";
@@ -132,6 +133,8 @@ public class DataHelperWork {
                 subQ = "where PENDING="+(pending ? 1 : 0);
             else
                 subQ = "where GREENHOUSE_ID="+greenhouseId+" and PENDING="+(pending ? 1 : 0);
+            if(cultivationId == -1)
+                subQ +=" and CULTIVATION_ID=-1";
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
             String query = "select * from WORK "+subQ;
             Cursor cursor = db.rawQuery(query, null);

@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getFragmentManager().beginTransaction().replace(R.id.content, storeFragmentManager.getFragment(FragmentCultivations.TAG)).commit();
                 break;
             case R.id.drawer_work:
-                getSupportActionBar().setSubtitle(R.string.works);
+                getSupportActionBar().setSubtitle(R.string.genera_works);
                 storeFragmentManager.removeFragment(FragmentWorks.TAG);
                 storeFragmentManager.addFragment(new FragmentWorks(), FragmentWorks.TAG, null);
                 getFragmentManager().beginTransaction().replace(R.id.content, storeFragmentManager.getFragment(FragmentWorks.TAG)).commit();

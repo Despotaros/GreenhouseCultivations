@@ -57,7 +57,7 @@ public class FragmentCompletedWorks extends Fragment {
      */
     private void loadData() {
         DataHelperWork dHelper = new DataHelperWork(getActivity());
-        works = dHelper.getAll(Greenhouse.getInstance().getContent().getId(),false);
+        works = dHelper.getAll(Greenhouse.getInstance().getContent().getId(),false,-1);
         ListView listView = (ListView)mView.findViewById(R.id.lsCompletedWorks);
         ContentWorkListAdapter adapter = new ContentWorkListAdapter(getActivity(),R.layout.list_item_work,works);
         listView.setAdapter(adapter);
