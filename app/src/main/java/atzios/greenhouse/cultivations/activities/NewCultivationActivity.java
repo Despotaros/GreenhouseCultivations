@@ -71,11 +71,12 @@ public class NewCultivationActivity extends AppCompatActivity {
         if(edit)
             getSupportActionBar().setTitle(R.string.edit_cultivation);
 
-        loadData();
+
 
         final Button btn = (Button)findViewById(R.id.btnDate);
         final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewCultivationActivity.this);
         btn.setText(dateFormat.format(Calendar.getInstance().getTime().getTime()));
+        greenhouseCultivation.setStartDate(Calendar.getInstance().getTime().getTime());
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +109,7 @@ public class NewCultivationActivity extends AppCompatActivity {
 
             }
         });
+        loadData();
     }
 
     @Override

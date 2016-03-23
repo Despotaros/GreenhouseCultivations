@@ -73,9 +73,12 @@ public class NewWorkActivity extends AppCompatActivity {
         if(edit)
             getSupportActionBar().setTitle(R.string.edit_work);
 
-        loadData();
-
         final Button btn = (Button)findViewById(R.id.btnDate);
+        final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewWorkActivity.this);
+        /* Προκαθοριζουμε την σημερινη ημερομηνια ως την προεπιλεγμενη */
+        btn.setText(dateFormat.format((Calendar.getInstance().getTime().getTime())));
+        work.setDate(Calendar.getInstance().getTime().getTime());
+        /* Οριζουμε το click event του Date button */
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,15 +90,11 @@ public class NewWorkActivity extends AppCompatActivity {
                     public void onDatePicked(int year, int month, int day) {
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year,month,day,0,0,0);
-
-                        java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewWorkActivity.this);
                         btn.setText(dateFormat.format(calendar.getTime()));
                         work.setDate(calendar.getTime().getTime());
-
                     }
                 });
                 dialogPickDate.create(work.getDate()).show();
-
             }
         });
 
@@ -109,6 +108,8 @@ public class NewWorkActivity extends AppCompatActivity {
 
             }
         });
+
+        loadData();
     }
 
     @Override
