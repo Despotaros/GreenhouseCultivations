@@ -48,9 +48,6 @@ public class NewGreenhouseActivity extends AppCompatActivity {
             case R.id.action_done:
                 /* Δημιουργησε το θερμοκηπιο */
                 createGreenhouse();
-                /* Τερματισε το activity με αποτελεσμα ΟΚ */
-                setResult(RESULT_OK);
-                finish();
                 break;
             default:
                 break;
@@ -84,6 +81,9 @@ public class NewGreenhouseActivity extends AppCompatActivity {
         if(!contentGreenhouse.getName().equals("")) {
             DataHelperGreenhouse dHelper = new DataHelperGreenhouse(this);
             dHelper.create(contentGreenhouse);
+            /* Τερματισε το activity με αποτελεσμα ΟΚ */
+            setResult(RESULT_OK);
+            finish();
         }
         else
             Toast.makeText(this,R.string.greenhouse_empty_name,Toast.LENGTH_LONG).show();
