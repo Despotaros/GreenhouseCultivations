@@ -60,7 +60,6 @@
   <string name="hint_cultivation_name">Enter cultivation\'s name</string>
   <string name="delete">Delete</string>
   <string name="new_cultivation">New cultivation</string>
-
   <string name="set">Set</string>
   <string name="cultivation">Cultivation</string>
   <string name="date">Date</string>
@@ -94,5 +93,7 @@
   <string name="day_offset_summary">Set the days before a cultivation completes to get notify</string>
   <string name="pick_date">Pick date</string>
   <string name="genera_works">Genere works</string>
+  <string name="toast_cannot_delete_gh">You cannot delete the only active Greenhouse!</string>
+  <string name="toast_greenhouse_deleted_successfully">Greenhouse deleted!</string>
 
 </resources>

@@ -96,6 +96,7 @@ public class FragmentInfo extends Fragment {
     private void viewClickListeners() {
         ImageButton btn = (ImageButton)mView.findViewById(R.id.btnCamera);
 
+        /* On click event Για το κουμπι της καμερας */
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,7 +110,7 @@ public class FragmentInfo extends Fragment {
                 }
             }
         });
-
+        /* On Click event Οταν παταμε στο ονομα του θερμοκηπιου για να το ενημερωσουμε */
         View view = mView.findViewById(R.id.cvName);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,37 +139,7 @@ public class FragmentInfo extends Fragment {
             }
         });
 
-
-        view = mView.findViewById(R.id.cvAddress);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Dimiourgoume ton dialogo
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                //Titlos
-                builder.setTitle(R.string.update);
-
-                View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_edit,(ViewGroup)mView,false);
-                builder.setView(view);
-
-                final EditText ed = (EditText)view.findViewById(R.id.editText);
-                ed.setHint(R.string.hint_greenhouse_address);
-               // ed.setText(greenhouse.getName());
-                builder.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        greenhouse.setAddress(ed.getText().toString());
-                        loadData();
-                        updateGreenhouse();
-
-                    }
-                });
-                builder.setNegativeButton(R.string.cancel, null);
-                builder.create().show();
-            }
-        });
-
+        /* On Click event Οταν παταμε στο εμβαδον του θερμοκηπιου για να το ενημερωσουμε */
         view = mView.findViewById(R.id.cvArea);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,15 +168,13 @@ public class FragmentInfo extends Fragment {
                         } catch (NumberFormatException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 });
                 builder.setNegativeButton(R.string.cancel, null);
                 builder.create().show();
             }
         });
-
+        /* On click event Οταν παταμε στην καρτελα με τις καλλιεργειες μας παει στο fragment cultivations */
         view = mView.findViewById(R.id.cvCultivations);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,6 +183,7 @@ public class FragmentInfo extends Fragment {
                     listener.onFragmentFocus(R.id.drawer_cultivations);
             }
         });
+        /* On click event Οταν παταμε στην καρτελα με τις εργασιες μας παει στο fragment works */
         view = mView.findViewById(R.id.cvWorks);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,30 +192,31 @@ public class FragmentInfo extends Fragment {
                     listener.onFragmentFocus(R.id.drawer_work);
             }
         });
-
+        /* On Click event Οταν παταμε στο κουμπι του καδου για την διαγραφη του θερμοκηπιου*/
         FloatingActionButton fab =  (FloatingActionButton) mView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.delete);
-                builder.setMessage(R.string.confirm_delete);
-                builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        DataHelperGreenhouse gHelper = new DataHelperGreenhouse(getActivity());
-                        if(gHelper.getNames().size() > 1) {
-                            gHelper.delete(Greenhouse.getInstance().getContent().getId(),true);
-                            loadData();
-                            updateGreenhouse();
-                            if (listener != null)
-                                listener.onNameUpdated();
-                        }
 
-                    }
-                });
-                builder.setNegativeButton(R.string.cancel,null);
-                builder.create().show();
+                final DataHelperGreenhouse gHelper = new DataHelperGreenhouse(getActivity());
+                if (gHelper.getNames().size() > 1) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle(R.string.delete);
+                    builder.setMessage(R.string.confirm_delete);
+                    builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            gHelper.delete(Greenhouse.getInstance().getContent().getId(),true);
+                            Toast.makeText(getActivity(),R.string.toast_greenhouse_deleted_successfully,Toast.LENGTH_LONG).show();
+                            if (listener != null)
+                                listener.onGreenhouseDeleted();
+                        }
+                    });
+                    builder.setNegativeButton(R.string.cancel, null);
+                    builder.create().show();
+                }
+                else
+                    Toast.makeText(getActivity(),R.string.toast_cannot_delete_gh,Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -391,6 +362,7 @@ public class FragmentInfo extends Fragment {
      */
     public interface FragmentInfoCallbacks {
         void onNameUpdated();
+        void onGreenhouseDeleted();
         void onPictureTaken(String path);
         void onFragmentFocus(int id);
     }

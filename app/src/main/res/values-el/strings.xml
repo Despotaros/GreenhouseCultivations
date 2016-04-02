@@ -83,5 +83,7 @@
     <string name="day_offset">Μέρες πρωτού ολοκληρωθούν</string>
     <string name="day_offset_summary">Ορίστε πόσες μέρες πρώτου ολοκληρωθεί μία καλλιέργεια να ειδοποιηθήτε</string>
     <string name="genera_works">Γενικές εργασίες</string>
+    <string name="toast_cannot_delete_gh">Δεν μπορείτε να διαγράψετε το μοναδικό ενεργό θερμοκήπιο!</string>
+    <string name="toast_greenhouse_deleted_successfully">Το θερμοκήπιο διαγράφτηκε!</string>
 
 </resources>

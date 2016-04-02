@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -60,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mDrawerToggle;
     /* Το id του fragment οπου ειναι ενεργο καθε φορα */
     private int mNavItemId;
-    /* Η θεση του θερμοκηπιου που ειναι επιλεγμενο */
-    private static int gPos = 0;
+    /* Η θεση του επιλεγμενου θερμοκηπιου */
+    private static int gPos = -1;
     /* Η λίστα με ολα θα θερμοκηπια μας */
     private ArrayList<ContentGreenhouse> greenhouseContents = new ArrayList<>();
     /* Το επιλεγμενο drawer header */
@@ -117,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 @Override
+                public void onGreenhouseDeleted() {
+                    gPos = -1;
+                    greenhouseSpinnerInvalidate();
+                }
+
+                @Override
                 public void onPictureTaken(String path) {
                     /* Οταν τραβαμε νεα φωτοφραφια ενημερωσε το drawer */
                     setDrawerImage(path);
@@ -167,11 +172,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /* Απο την βαση περνουμε ολα τα θερμοκηπια */
         final DataHelperGreenhouse dataHelperGreenhouse = new DataHelperGreenhouse(this);
         greenhouseContents = dataHelperGreenhouse.getAll();
-        if(greenhouseContents.size() >= 1) {
-            Greenhouse.getInstance().setContent(greenhouseContents.get(0));
-            Greenhouse.getInstance().setReport(dataHelperGreenhouse.getReport(greenhouseContents.get(0).getId()));
 
-        }
         /* Φορτωνουμε τα ονομα τους σε ενα Spinner για να μπορει ο χρηστης να τα επιλέγει*/
         Spinner spinner = (Spinner) currentHeader.findViewById(R.id.spGreenhouses);
         ArrayList<String> names = dataHelperGreenhouse.getNames();
@@ -181,18 +182,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,R.layout.spinner_item,names);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-        if(gPos != -1)
-            spinner.setSelection(gPos);
+
         /* Οταν ο χρηστης επιλεγει ενα θερμοκηπιο ενημερωσε τα fragments */
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 /* Ενημερωνουμε ποιο θερμοκηπιο ειναι το επιλεγμενο */
                 if (position < greenhouseContents.size()) {
-
                     gPos = position;
-                    Greenhouse.getInstance().setContent(greenhouseContents.get(gPos));
-                    Greenhouse.getInstance().setReport(dataHelperGreenhouse.getReport(greenhouseContents.get(gPos).getId()));
+                    Greenhouse.getInstance().setContent(greenhouseContents.get(position));
+                    Greenhouse.getInstance().setReport(dataHelperGreenhouse.getReport(greenhouseContents.get(position).getId()));
                     updateFragments();
                     mDrawerLayout.closeDrawer(GravityCompat.START);
                     getSupportActionBar().setTitle(Greenhouse.getInstance().getContent().getName());
@@ -201,9 +200,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.i("MainActivity", "Greenhouse Spinner. Nothing selected!");
+                Log.i(CLASS_TAG, "Greenhouse Spinner. Nothing selected!");
             }
         });
+
+        /** Δεν υπαρχει επιλεγμενο θερμοκηπιο */
+        if(gPos == -1)
+            gPos = 0 ;
+
+        /* Θετουμε ενεργο θερμοκηπιο */
+        Greenhouse.getInstance().setContent(greenhouseContents.get(gPos));
+        Greenhouse.getInstance().setReport(dataHelperGreenhouse.getReport(greenhouseContents.get(gPos).getId()));
+        spinner.setSelection(gPos);
     }
 
 
@@ -328,7 +336,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 view = mDrawerLayout.findViewById(R.id.imagePreview);
                 view.setVisibility(View.INVISIBLE);
             } catch (NullPointerException e) {
-                Log.e("MainActivity", "setDrawerImage->" + e.getMessage());
+                Log.e(CLASS_TAG, "setDrawerImage->" + e.getMessage());
             }
         }
     }
@@ -353,7 +361,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return BitmapFactory.decodeFile(path, opts);
         }
         catch (NullPointerException e) {
-            Log.e("MainActivity","getThumbnailBitmap->"+e.getMessage());
+            Log.e(CLASS_TAG,"getThumbnailBitmap->"+e.getMessage());
             return null;
         }
     }
