@@ -16,4 +16,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/edComments"
          />
+
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvWarning"
+        android:text="ργφγδφγγδφδγφ"
+        android:visibility="gone" />
 </LinearLayout>

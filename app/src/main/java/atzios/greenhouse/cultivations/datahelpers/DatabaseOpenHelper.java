@@ -32,9 +32,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                     "LAST_NAME text,PHONE text,ADDRESS text)");
             //Create Greenhouses table
             db.execSQL("create table GREENHOUSE(ID integer primary key autoincrement,USER_ID integer,GREENHOUSE_NAME text," +
-                    "AREA real,LATITUDE real,LONGITUDE real,ADDRESS text,IMAGE_PATH text)");
+                    "AREA real,ADDRESS text,IMAGE_PATH text)");
             //Create Cultivations table
-            db.execSQL("create table CULTIVATION(ID integer primary key autoincrement,CATEGORY_ID integer,CULTIVATION_NAME text,MONTH_DURATION integer,COMMENTS text)");
+            db.execSQL("create table CULTIVATION(ID integer primary key autoincrement,CATEGORY_ID integer,CULTIVATION_NAME text,COMMENTS text)");
             //Create Cultivation categories table
             db.execSQL("create table CULTIVATION_CATEGORY(ID integer primary key autoincrement,CATEGORY_NAME text)");
             //Create greenhouse cultivations table

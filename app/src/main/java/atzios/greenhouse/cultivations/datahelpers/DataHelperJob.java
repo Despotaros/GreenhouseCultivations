@@ -28,11 +28,15 @@ public class DataHelperJob {
             e.printStackTrace();
         }
     }
-    public void delete(int id) {
+    public void delete(int id,boolean deleteWorks) {
         try {
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
             String query = "delete from JOB where id="+id;
             db.execSQL(query);
+            if(deleteWorks) {
+                query = "delete from WORK where JOB_ID="+id;
+                db.execSQL(query);
+            }
             db.close();
         }
         catch (SQLiteException e) {

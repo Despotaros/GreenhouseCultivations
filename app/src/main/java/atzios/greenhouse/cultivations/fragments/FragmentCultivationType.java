@@ -64,6 +64,7 @@ public class FragmentCultivationType extends Fragment {
         builder.setTitle(R.string.new_cultivation);
         View layout = getActivity().getLayoutInflater().inflate(R.layout.dialog_new, (ViewGroup) getActivity().getWindow().getDecorView().findViewById(android.R.id.content),false);
         builder.setView(layout);
+
         final EditText name = (EditText)layout.findViewById(R.id.edName);
         name.setHint(R.string.hint_cultivation_name);
         final EditText comments = (EditText)layout.findViewById(R.id.edComments);
@@ -97,7 +98,9 @@ public class FragmentCultivationType extends Fragment {
         View layout = getActivity().getLayoutInflater().inflate(R.layout.dialog_new, (ViewGroup) getActivity().getWindow().getDecorView().findViewById(android.R.id.content), false);
 
         builder.setView(layout);
-
+        CustomTextView tv = (CustomTextView)layout.findViewById(R.id.tvWarning);
+        tv.setText(R.string.warning_deleting_cultivation);
+        tv.setVisibility(View.VISIBLE);
         final ContentCultivation cultivation = cultivations.get(position);
 
         final EditText name = (EditText)layout.findViewById(R.id.edName);
@@ -124,7 +127,8 @@ public class FragmentCultivationType extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 DataHelperCultivation helperCultivation = new DataHelperCultivation(getActivity());
-                helperCultivation.delete(cultivation.getId());
+                helperCultivation.delete(cultivation.getId(),true);
+
                 loadData();
                 if(callbacks!=null)
                     callbacks.onCultivationAdded();

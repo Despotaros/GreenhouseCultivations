@@ -81,12 +81,13 @@ public class FragmentJob extends Fragment {
         builder.setView(layout);
 
         final ContentJob job = jobs.get(position);
-
+        CustomTextView tv = (CustomTextView)layout.findViewById(R.id.tvWarning);
+        tv.setText(R.string.warning_delete_work);
         final EditText name = (EditText)layout.findViewById(R.id.edName);
         name.setText(job.getName());
         final EditText comments = (EditText)layout.findViewById(R.id.edComments);
         comments.setText(job.getComments());
-
+        tv.setVisibility(View.VISIBLE);
         builder.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -106,7 +107,7 @@ public class FragmentJob extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 DataHelperJob helperJob = new DataHelperJob(getActivity());
-                helperJob.delete(job.getId());
+                helperJob.delete(job.getId(),true);
                 loadData();
                 if(callbacks!=null)
                     callbacks.onJobsEdit();

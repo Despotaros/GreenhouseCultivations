@@ -71,7 +71,7 @@
     <string name="select_cultivation_type">Επιλέξτε είδος καλλιέργειας πρώτα.</string>
     <string name="pick_date">Επιλέξτε ημερομηνία</string>
     <string name="set">Θέσε</string>
-    <string name="not_selected">Δέν επιλέχθηκε&#8230;</string>
+    <string name="not_selected">Γενική εργασία</string>
     <string name="about">Σχετικά με</string>
     <string name="version">Έκδοση</string>
     <string name="notifications_settings">Ρυθμίσεις ειδοποιήσεων </string>
@@ -85,5 +85,7 @@
     <string name="genera_works">Γενικές εργασίες</string>
     <string name="toast_cannot_delete_gh">Δεν μπορείτε να διαγράψετε το μοναδικό ενεργό θερμοκήπιο!</string>
     <string name="toast_greenhouse_deleted_successfully">Το θερμοκήπιο διαγράφτηκε!</string>
+    <string name="warning_delete_work">*** Διαγράφωντας το είδος εργασία θα διαγραφούν και όλες οι εργασίες που το περιέχουν!</string>
+    <string name="warning_deleting_cultivation">*** Διαγράφωντας το είδος καλλιέργειας θα διαγραφούν και όλες οι καλλιέργειες που το περιέχουν!</string>
 
 </resources>

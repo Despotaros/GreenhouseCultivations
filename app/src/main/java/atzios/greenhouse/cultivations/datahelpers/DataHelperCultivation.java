@@ -22,8 +22,8 @@ public class DataHelperCultivation {
         try {
 
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
-            String query = "insert into CULTIVATION(CATEGORY_ID,CULTIVATION_NAME,MONTH_DURATION,COMMENTS) values(" + cultivation.getCategoryId() + ",'" + cultivation.getName() + "'," +
-                    +cultivation.getMonthDuration()+",'"+cultivation.getComments()+"')";
+            String query = "insert into CULTIVATION(CATEGORY_ID,CULTIVATION_NAME,MONTH_DURATION,COMMENTS) values(" + cultivation.getCategoryId() + ",'" + cultivation.getName()
+                    + "','" + cultivation.getComments()+"')";
             db.execSQL(query);
             db.close();
         }
@@ -31,11 +31,15 @@ public class DataHelperCultivation {
             e.printStackTrace();
         }
     }
-    public void delete(int id) {
+    public void delete(int id,boolean deleteGHCultivations) {
         try {
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
             String query = "delete from CULTIVATION where id="+id;
             db.execSQL(query);
+            if(deleteGHCultivations) {
+                query = "delete from GREENHOUSE_CULTIVATION where CULTIVATION_ID="+id;
+                db.execSQL(query);
+            }
             db.close();
         }
         catch (SQLiteException e) {
@@ -46,8 +50,8 @@ public class DataHelperCultivation {
     public void update(ContentCultivation cultivation) {
         try {
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();;
-            String query = "update CULTIVATION set CULTIVATION_NAME='" + cultivation.getName() + "',COMMENTS='" + cultivation.getComments() + "'," +
-                    " MONTH_DURATION="+cultivation.getMonthDuration()+" where id="+cultivation.getId();
+            String query = "update CULTIVATION set CULTIVATION_NAME='" + cultivation.getName() + "',COMMENTS='" + cultivation.getComments() +
+                    " where id="+cultivation.getId();
             db.execSQL(query);
             db.close();
 
@@ -76,8 +80,7 @@ public class DataHelperCultivation {
                     cult.setId(cursor.getInt(0));
                     cult.setCategoryId(cursor.getInt(1));
                     cult.setName(cursor.getString(2));
-                    cult.setMonthDuration(cursor.getInt(3));
-                    cult.setComments(cursor.getString(4));
+                    cult.setComments(cursor.getString(3));
                     cultivations.add(cult);
                 }while (cursor.moveToNext());
             }
@@ -100,8 +103,7 @@ public class DataHelperCultivation {
                 cultivation.setId(cursor.getInt(0));
                 cultivation.setCategoryId(cursor.getInt(1));
                 cultivation.setName(cursor.getString(2));
-                cultivation.setMonthDuration(cursor.getInt(3));
-                cultivation.setComments(cursor.getString(4));
+                cultivation.setComments(cursor.getString(3));
             }
             cursor.close();
             db.close();

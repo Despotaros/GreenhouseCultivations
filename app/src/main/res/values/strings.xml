@@ -75,7 +75,6 @@
   <string name="greenhouse_empty_name">Greenhouse name cannot be empty!!!</string>
   <string name="select_cultivation_type">Select cultivation type first!!!</string>
   <string name="select_job_type">Select what job you will perform first.</string>
-  <string name="not_selected">Not selected&#8230;</string>
   <string name="on">On</string>
   <string name="permission_denied" translatable="false">Permission denied! Grand the permission first.</string>
   <string name="about">About</string>
@@ -95,5 +94,8 @@
   <string name="genera_works">Genere works</string>
   <string name="toast_cannot_delete_gh">You cannot delete the only active Greenhouse!</string>
   <string name="toast_greenhouse_deleted_successfully">Greenhouse deleted!</string>
+  <string name="not_selected">General Work</string>
+  <string name="warning_delete_work">*** Deleting a job type will also deleting all the works with this job type!</string>
+  <string name="warning_deleting_cultivation">*** Deleting a cultivation type , will also deletes the cultivations with this cultivation type!</string>
 
 </resources>

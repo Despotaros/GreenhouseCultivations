@@ -1,6 +1,6 @@
 package atzios.greenhouse.cultivations.contents;
 
-import com.google.android.gms.maps.model.LatLng;
+
 
 /**
  * Content class Greenhouse
@@ -12,7 +12,6 @@ public class ContentGreenhouse {
     private int userId; //User id
     private String name; //Greenhouse name
     private double area; //Greenhouse area in square meters
-    private LatLng location; //Greenhouse location (Google maps Loc point)
     private String address; //Greenhouse address
     private String imagePath; //Greenhouse image preview path
 
@@ -21,7 +20,6 @@ public class ContentGreenhouse {
         userId = -1;
         name = null;
         area = 0;
-        location = null;
         address = null;
         imagePath = null;
     }
@@ -58,28 +56,7 @@ public class ContentGreenhouse {
         this.area = area;
     }
 
-    public LatLng getLocation() {
-        return location;
-    }
 
-    public void setLocation(LatLng location) {
-        this.location = location;
-    }
-    public void setLocation(double latitude,double longitude) {
-        location = new LatLng(latitude,longitude);
-    }
-    public String getLatitudeString() {
-        if(location == null)
-            return "";
-        else
-            return Double.toString(location.latitude);
-    }
-    public String getLongitudeString() {
-        if(location == null)
-            return "";
-        else
-            return Double.toString(location.longitude);
-    }
 
     public String getAddress() {
         return address;

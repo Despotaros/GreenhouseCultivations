@@ -182,7 +182,7 @@ public class DataHelperGreenhouseCultivation {
         catch (SQLiteException e) {
             Log.e(CLASS_TAG,"delete:"+e.getMessage());
         }
-
     }
+
 
 }

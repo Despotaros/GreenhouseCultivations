@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.google.android.gms.maps.model.LatLng;
+
 
 import java.util.ArrayList;
 
@@ -32,12 +32,9 @@ public class DataHelperGreenhouse {
     public void create(ContentGreenhouse greenhouse) {
         try {
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
-            LatLng loc = greenhouse.getLocation();
-            if(loc == null)
-                loc = new LatLng(0,0);
-            String query = "insert into GREENHOUSE(USER_ID,GREENHOUSE_NAME,AREA,LATITUDE,LONGITUDE,ADDRESS,IMAGE_PATH)"
+            String query = "insert into GREENHOUSE(USER_ID,GREENHOUSE_NAME,AREA,ADDRESS,IMAGE_PATH)"
                     + " values("+greenhouse.getUserId()+",'"+greenhouse.getName()+"'," + greenhouse.getArea() +
-                    ",'"+loc.latitude+"','"+loc.longitude+"','"+greenhouse.getAddress()+"','"+greenhouse.getImagePath()+"')";
+                    ",'"+greenhouse.getAddress()+"','"+greenhouse.getImagePath()+"')";
 
             db.execSQL(query);
             db.close();
@@ -86,9 +83,8 @@ public class DataHelperGreenhouse {
             gh.setId(id);
             gh.setName(cursor.getString(2));
             gh.setArea(cursor.getDouble(3));
-            gh.setLocation(cursor.getDouble(4),cursor.getDouble(5));
-            gh.setAddress(cursor.getString(6));
-            gh.setImagePath(cursor.getString(7));
+            gh.setAddress(cursor.getString(4));
+            gh.setImagePath(cursor.getString(5));
         }
         cursor.close();
         db.close();
@@ -112,9 +108,8 @@ public class DataHelperGreenhouse {
                 content.setUserId(cursor.getInt(1));
                 content.setName(cursor.getString(2));
                 content.setArea(cursor.getDouble(3));
-                content.setLocation(cursor.getDouble(4),cursor.getDouble(5));
-                content.setAddress(cursor.getString(6));
-                content.setImagePath(cursor.getString(7));
+                content.setAddress(cursor.getString(4));
+                content.setImagePath(cursor.getString(5));
                 greenhouses.add(content);
                 hasRow = cursor.moveToNext();
             }
@@ -131,11 +126,9 @@ public class DataHelperGreenhouse {
     public void update(ContentGreenhouse gh) {
         try {
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
-            LatLng loc = gh.getLocation();
-            if(loc == null)
-                loc = new LatLng(0,0);
+
             String query = "update GREENHOUSE set USER_ID="+gh.getUserId()+",GREENHOUSE_NAME='"+gh.getName()+"',AREA=" +
-                    +gh.getArea()+",LATITUDE='"+loc.latitude+"',LONGITUDE='"+loc.longitude+"',ADDRESS='"+gh.getAddress()+"'" +
+                    +gh.getArea()+"',ADDRESS='"+gh.getAddress()+"'" +
                     ",IMAGE_PATH='"+gh.getImagePath()+"' where id="+gh.getId();
 
             db.execSQL(query);

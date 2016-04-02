@@ -65,15 +65,7 @@ public class FragmentPendingWorks extends Fragment {
                 startActivity(intent);
             }
         });
-        adapter.setCallbackListener(new FragmentCompletedWorks.ContentWorkListAdapter.OnImageClicked() {
-            @Override
-            public void onImageClicked(int pos) {
-                works.get(pos).setPending(false);
-                dHelper.update(works.get(pos));
-                if(callback!=null)
-                    callback.invalidated();
-            }
-        });
+
 
     }
 

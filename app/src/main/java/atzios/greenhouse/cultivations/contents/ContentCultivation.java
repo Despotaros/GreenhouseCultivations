@@ -10,13 +10,13 @@ public class ContentCultivation {
     private int categoryId; //Cultivation category id
     private String name; //Cultivation name
     private String comments;
-    private int monthDuration; //Cultivation duration in months
+
 
     public ContentCultivation() {
         id = -1;
         name = null;
         comments = null;
-        monthDuration = 0;
+
         categoryId = -1;
     }
 
@@ -52,11 +52,5 @@ public class ContentCultivation {
         this.categoryId = categoryId;
     }
 
-    public int getMonthDuration() {
-        return monthDuration;
-    }
 
-    public void setMonthDuration(int monthDuration) {
-        this.monthDuration = monthDuration;
-    }
 }
