@@ -33,8 +33,8 @@ public class FragmentWorks extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newCult = new Intent(getActivity(), NewWorkActivity.class);
-                startActivity(newCult);
+                Intent newWork = new Intent(getActivity(), NewWorkActivity.class);
+                startActivity(newWork);
             }
         });
         return mView;

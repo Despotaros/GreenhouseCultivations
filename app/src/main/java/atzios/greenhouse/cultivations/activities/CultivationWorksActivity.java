@@ -1,13 +1,17 @@
 package atzios.greenhouse.cultivations.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -65,9 +69,24 @@ public class CultivationWorksActivity extends AppCompatActivity {
                 }
             });
 
+        /* Fab button click event */
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /* Αναλογα ποιο fragment ειναι το επιλεγμενο οταν παταει ο χρηστης το fab,
+                 * καλειται και αντιστοιχος διαλογος
+                 */
+                Intent newWork = new Intent(CultivationWorksActivity.this, NewWorkActivity.class);
+                newWork.putExtra("cID",cultivation.getId());
+                startActivity(newWork);
+            }
+        });
+
         /** Δημιουργουμε τα fragments των εργασιων */
         invalidateChildrenFragments();
     }
+
     private void toggleActiveButton() {
         final Button btn = (Button)findViewById(R.id.btnCompleted);
         if(cultivation.isActive())
@@ -80,6 +99,12 @@ public class CultivationWorksActivity extends AppCompatActivity {
             btn.setBackgroundColor(getResources().getColor(R.color.primary));
 
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_cultivation_works,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     /**
@@ -112,5 +137,39 @@ public class CultivationWorksActivity extends AppCompatActivity {
         mViewPager.setCurrentItem(0);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: // Οταν ο χρηστης πατησει το βελακι πισω
+                finish(); //Τερματιζει το activity
+                break;
+            case R.id.action_edit:
+                Intent edit = new Intent(CultivationWorksActivity.this,NewCultivationActivity.class);
+                edit.putExtra("edit",true);
+                edit.putExtra("id",cultivation.getId());
+                startActivityForResult(edit,20);
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 20) {
+            if(resultCode == 22) {
+                /* Ενημερωσε αν αλλαξε το ειδος καλλιεργειας */
+                final DataHelperGreenhouseCultivation dHelper = new DataHelperGreenhouseCultivation(this);
+                cultivation = dHelper.get(cId);
+                //getSupportActionBar().setTitle(R.string.cultivation);
+                getSupportActionBar().setSubtitle(dHelper.getCultivationName(cId));
+            }
+            else if (resultCode == 21) {
+                /* Η καλλιεργεια διαγραφηκε βγες απο την προβολη εργασιων */
+                finish();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

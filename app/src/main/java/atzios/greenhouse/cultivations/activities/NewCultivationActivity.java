@@ -36,6 +36,7 @@ import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperCultivation;
 
 import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouseCultivation;
+import atzios.greenhouse.cultivations.datahelpers.DataHelperWork;
 
 /**
  * NewCultivationActivity
@@ -211,8 +212,10 @@ public class NewCultivationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         /* Δημιουργια μενου */
-        if(edit)
-            getMenuInflater().inflate(R.menu.menu_edit_cultivation,menu);
+        if(edit) {
+            getMenuInflater().inflate(R.menu.menu_edit_cultivation, menu);
+            setResult(22);
+        }
         else
             getMenuInflater().inflate(R.menu.menu_new_greenhouse, menu);
         return super.onCreateOptionsMenu(menu);
@@ -253,6 +256,10 @@ public class NewCultivationActivity extends AppCompatActivity {
                 dialog.dismiss();
                 DataHelperGreenhouseCultivation h = new DataHelperGreenhouseCultivation(NewCultivationActivity.this);
                 h.delete(greenhouseCultivation.getId());
+                DataHelperWork dWork = new DataHelperWork(NewCultivationActivity.this);
+                dWork.deleteByCultId(greenhouseCultivation.getId());
+                if(edit)
+                    setResult(21);
                 finish();
             }
         });

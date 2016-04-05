@@ -29,6 +29,7 @@ import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 import atzios.greenhouse.cultivations.contents.ContentJob;
 import atzios.greenhouse.cultivations.contents.ContentWork;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperCultivation;
+import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouseCultivation;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperJob;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperWork;
 
@@ -68,17 +69,19 @@ public class NewWorkActivity extends AppCompatActivity {
             cID = getIntent().getExtras().getInt("cID",-1);
             if(cID == -1) {
                 getSupportActionBar().setSubtitle(R.string.not_selected);
+                work.setJobId(-1);
             }
             else {
-                DataHelperCultivation cultData = new DataHelperCultivation(getApplicationContext());
-                getSupportActionBar().setSubtitle( cultData.get(cID).getName());
+                DataHelperGreenhouseCultivation gHelper = new DataHelperGreenhouseCultivation(getApplicationContext());
+                gHelper.getCultivationName(cID);
+                getSupportActionBar().setSubtitle(gHelper.getCultivationName(cID));
 
             }
         }
         if(edit)
             getSupportActionBar().setTitle(R.string.edit_work);
 
-        work.setJobId(cID);
+        work.setCultivationId(cID);
 
         final Button btn = (Button)findViewById(R.id.btnDate);
         final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewWorkActivity.this);

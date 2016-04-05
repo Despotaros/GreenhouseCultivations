@@ -201,6 +201,17 @@ public class DataHelperWork {
         }
 
     }
+    public void deleteByCultId(int cId) {
+        try {
+            SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
+            String query = "delete from WORK where CULTIVATION_ID="+cId;
+            db.execSQL(query);
+            db.close();
+        }
+        catch (SQLiteException e) {
+            Log.e(CLASS_TAG,"deleteByCultId:"+e.getMessage());
+        }
+    }
 
 
 }
