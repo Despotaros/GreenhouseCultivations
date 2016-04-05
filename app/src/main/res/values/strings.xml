@@ -97,5 +97,7 @@
   <string name="not_selected">General Work</string>
   <string name="warning_delete_work">*** Deleting a job type will also deleting all the works with this job type!</string>
   <string name="warning_deleting_cultivation">*** Deleting a cultivation type , will also deletes the cultivations with this cultivation type!</string>
+  <string name="completed_work">Completed</string>
+  <string name="not_completed">Not completed</string>
 
 </resources>

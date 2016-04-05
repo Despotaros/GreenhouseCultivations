@@ -22,7 +22,7 @@ public class DataHelperCultivation {
         try {
 
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
-            String query = "insert into CULTIVATION(CATEGORY_ID,CULTIVATION_NAME,MONTH_DURATION,COMMENTS) values(" + cultivation.getCategoryId() + ",'" + cultivation.getName()
+            String query = "insert into CULTIVATION(CATEGORY_ID,CULTIVATION_NAME,COMMENTS) values(" + cultivation.getCategoryId() + ",'" + cultivation.getName()
                     + "','" + cultivation.getComments()+"')";
             db.execSQL(query);
             db.close();

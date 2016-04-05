@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,8 @@ public class FragmentPendingWorks extends Fragment {
     public final static String TAG = "FragmentPendingWorks";
     private ArrayList<ContentWork> works = new ArrayList<>();
     private View mView;
-    private OnFragmentInvalidated callback;
+    private int cId = -1;
+
 
 
     @Nullable
@@ -39,9 +41,7 @@ public class FragmentPendingWorks extends Fragment {
         /* Καθε φορα που το fragment γινεται active ενημερωσε το listview για τυχον αλλαγες */
         loadData();
     }
-    public void setOnFragmentInvalidated(OnFragmentInvalidated listener) {
-        callback = listener;
-    }
+
     public void refresh() {
         loadData();
     }
@@ -51,7 +51,8 @@ public class FragmentPendingWorks extends Fragment {
      */
     private void loadData() {
         final DataHelperWork dHelper = new DataHelperWork(getActivity());
-        works = dHelper.getAll(Greenhouse.getInstance().getContent().getId(),true,-1);
+        Log.e("PendingcID",Integer.toString(cId));
+        works = dHelper.getAll(Greenhouse.getInstance().getContent().getId(),true,cId);
         ListView listView = (ListView)mView.findViewById(R.id.lsPendingWorks);
         FragmentCompletedWorks.ContentWorkListAdapter adapter = new FragmentCompletedWorks.ContentWorkListAdapter(getActivity(),R.layout.list_item_work,works);
         listView.setAdapter(adapter);
@@ -62,15 +63,16 @@ public class FragmentPendingWorks extends Fragment {
                 Intent intent = new Intent(getActivity(), NewWorkActivity.class);
                 intent.putExtra("edit", true);
                 intent.putExtra("id", works.get(position).getId());
+                intent.putExtra("cID",works.get(position).getCultivationId());
                 startActivity(intent);
             }
         });
-
-
     }
 
-    public interface OnFragmentInvalidated {
-         void invalidated();
+    @Override
+    public void setArguments(Bundle args) {
+        if(args!=null)
+            cId = args.getInt("cId",-1);
+        super.setArguments(args);
     }
-
 }

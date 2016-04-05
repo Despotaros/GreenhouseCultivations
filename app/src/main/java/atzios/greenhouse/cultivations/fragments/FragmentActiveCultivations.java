@@ -20,6 +20,7 @@ import java.util.Date;
 import atzios.greenhouse.cultivations.CustomTextView;
 import atzios.greenhouse.cultivations.Greenhouse;
 import atzios.greenhouse.cultivations.R;
+import atzios.greenhouse.cultivations.activities.CultivationWorksActivity;
 import atzios.greenhouse.cultivations.activities.NewCultivationActivity;
 import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperCultivation;
@@ -62,9 +63,10 @@ public class FragmentActiveCultivations extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),NewCultivationActivity.class);
-                intent.putExtra("edit",true);
-                intent.putExtra("id",cultivations.get(position).getId());
+                Intent intent = new Intent(getActivity(),CultivationWorksActivity.class);
+                intent.putExtra("cId",cultivations.get(position).getId());
+               // intent.putExtra("edit",true);
+                //intent.putExtra("id",cultivations.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -116,7 +118,7 @@ public class FragmentActiveCultivations extends Fragment {
                 holder.comments = (CustomTextView) row.findViewById(R.id.tvComments);
                 holder.date = (CustomTextView) row.findViewById(R.id.tvDate);
                 holder.completedDate = (CustomTextView) row.findViewById(R.id.tvDuration);
-
+                holder.completed = (CustomTextView) row.findViewById(R.id.tvCompleted);
 
                 row.setTag(holder);
             } else {
@@ -136,6 +138,17 @@ public class FragmentActiveCultivations extends Fragment {
 
             holder.date.setText(context.getText(R.string.date)+":"+dateFormat.format(calendar.getTime()));
 
+            if(!contents.get(position).isActive()) {
+                holder.completed.setVisibility(View.VISIBLE);
+                calendar.setTime(new Date(contents.get(position).getEndDate()));
+                holder.completedDate.setText(dateFormat.format(calendar.getTime()));
+                holder.completedDate.setVisibility(View.VISIBLE);
+            }
+            else {
+                holder.completed.setVisibility(View.INVISIBLE);
+                holder.completedDate.setVisibility(View.INVISIBLE);
+            }
+
             return row;
 
 
@@ -147,6 +160,7 @@ public class FragmentActiveCultivations extends Fragment {
             CustomTextView date;
             CustomTextView completedDate;
             CustomTextView comments;
+            CustomTextView completed;
         }
     }
 

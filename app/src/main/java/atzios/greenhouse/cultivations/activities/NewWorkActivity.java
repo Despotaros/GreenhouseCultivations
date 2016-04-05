@@ -7,14 +7,12 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -27,12 +25,10 @@ import java.util.Date;
 import atzios.greenhouse.cultivations.DialogPickDate;
 import atzios.greenhouse.cultivations.Greenhouse;
 import atzios.greenhouse.cultivations.R;
-import atzios.greenhouse.cultivations.contents.ContentCultivation;
 import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 import atzios.greenhouse.cultivations.contents.ContentJob;
 import atzios.greenhouse.cultivations.contents.ContentWork;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperCultivation;
-import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouseCultivation;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperJob;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperWork;
 
@@ -63,15 +59,26 @@ public class NewWorkActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
+        int cID = -1 ;
         /* Βλεπουμε αν το activity εχει καλεστει σε edit mode */
         if(getIntent().getExtras() != null )
         {
             edit = getIntent().getExtras().getBoolean("edit",false);
             wId = getIntent().getExtras().getInt("id", -1);
+            cID = getIntent().getExtras().getInt("cID",-1);
+            if(cID == -1) {
+                getSupportActionBar().setSubtitle(R.string.not_selected);
+            }
+            else {
+                DataHelperCultivation cultData = new DataHelperCultivation(getApplicationContext());
+                getSupportActionBar().setSubtitle( cultData.get(cID).getName());
+
+            }
         }
         if(edit)
             getSupportActionBar().setTitle(R.string.edit_work);
+
+        work.setJobId(cID);
 
         final Button btn = (Button)findViewById(R.id.btnDate);
         final java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(NewWorkActivity.this);
@@ -109,6 +116,18 @@ public class NewWorkActivity extends AppCompatActivity {
             }
         });
 
+        final Button comp = (Button)findViewById(R.id.btnCompleted);
+        comp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                work.setPending(!work.isPending());
+                if(work.isPending())
+                    comp.setText(R.string.completed_work);
+                else
+                    comp.setText(R.string.not_completed);
+            }
+        });
+
         loadData();
     }
 
@@ -120,50 +139,7 @@ public class NewWorkActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Αρχικοποιουμε το spinner με τα ονοματα των ενεργων καλλιεργειων του
-     * επιλεγμενου θερμοκηπιου
-     */
-    private void invalidateCultivationSpinner() {
-        DataHelperGreenhouseCultivation cultHelper = new DataHelperGreenhouseCultivation(this);
-        cultivations = cultHelper.getAll(Greenhouse.getInstance().getContent().getId(),true);
 
-        /* Δημιουργουμε την λιστα με τα ονοματα των καλλιεργειων */
-        ArrayList<String> names = new ArrayList<>();
-        names.add(getText(R.string.not_selected).toString());
-        DataHelperCultivation cultTypeHelper = new DataHelperCultivation(this);
-        int pos = -1,index = -1;
-        for(ContentGreenhouseCultivation cult : cultivations) {
-            index++;
-            if(work.getCultivationId() == cult.getId())
-                pos = index;
-            ContentCultivation c = cultTypeHelper.get(cult.getCultivationId());
-            names.add(c.getName() + " - " + c.getComments());
-        }
-
-        Spinner spinner = (Spinner)findViewById(R.id.spCultNames);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,names);
-        spinner.setAdapter(adapter);
-        if(pos >= 0)
-            spinner.setSelection(pos);
-        else
-            work.setCultivationId(-1);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position >0)
-                    work.setCultivationId(cultivations.get(position-1).getId());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-
-    }
     /**
      * Αρχηκοποιουμε το spinner με τα ονοματα των εργασιων του
      * επιλεγμενου θερμοκηπιου
@@ -222,11 +198,34 @@ public class NewWorkActivity extends AppCompatActivity {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date(work.getDate()));
             btn.setText(dateFormat.format(calendar.getTime()));
+            toggleActiveButton();
+            
+            Button btns = (Button)findViewById(R.id.btnCompleted);
+            btns.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    work.setPending(!work.isPending());
+                    toggleActiveButton();
+                }
+            });
 
 
         }
-        invalidateCultivationSpinner();
         invalidateJobsSpinner();
+    }
+    private void toggleActiveButton() {
+        final Button btn = (Button)findViewById(R.id.btnCompleted);
+
+        if(work.isPending())
+        {
+            btn.setText(R.string.not_completed);
+            btn.setBackgroundColor(getResources().getColor(R.color.tomato));
+        }
+        else {
+            btn.setText(R.string.completed_work);
+            btn.setBackgroundColor(getResources().getColor(R.color.primary));
+
+        }
     }
 
     @Override

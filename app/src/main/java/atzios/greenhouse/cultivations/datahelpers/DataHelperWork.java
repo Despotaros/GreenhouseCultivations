@@ -10,13 +10,13 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
-import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 import atzios.greenhouse.cultivations.contents.ContentWork;
 
 
 /**
- * Created by Panos on 22/12/2014.
+ * Class DataHelperWork
+ * Περιεχει ολα τα CRUD για τον πινακα Work
+ * Created by Atzios on 22/12/2014.
  */
 public class DataHelperWork {
     private final String CLASS_TAG = "DataHelperWork";
@@ -64,7 +64,7 @@ public class DataHelperWork {
     public ArrayList<ContentWork> getPendingWorks(int greenhouseId) {
         ArrayList<ContentWork> pending = new ArrayList<>();
         try {
-            String subQ = "";
+            String subQ ;
             if(greenhouseId == -1)
                 subQ = "where pending=1 ";
             else
@@ -128,15 +128,14 @@ public class DataHelperWork {
     public ArrayList<ContentWork> getAll(int greenhouseId,boolean pending,int cultivationId) {
         ArrayList<ContentWork> gWorks = new ArrayList<>();
         try {
-            String subQ = "";
+            String subQ ;
             if(greenhouseId == -1)
                 subQ = "where PENDING="+(pending ? 1 : 0);
             else
-                subQ = "where GREENHOUSE_ID="+greenhouseId+" and PENDING="+(pending ? 1 : 0);
-            if(cultivationId == -1)
-                subQ +=" and CULTIVATION_ID=-1";
+                subQ = "where GREENHOUSE_ID="+greenhouseId+" and PENDING="+(pending ? 1 : 0)+" and CULTIVATION_ID="+cultivationId;
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
             String query = "select * from WORK "+subQ;
+            Log.e("query",query);
             Cursor cursor = db.rawQuery(query, null);
             if (cursor.moveToFirst()) {
                 do {

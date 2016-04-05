@@ -87,5 +87,7 @@
     <string name="toast_greenhouse_deleted_successfully">Το θερμοκήπιο διαγράφτηκε!</string>
     <string name="warning_delete_work">*** Διαγράφωντας το είδος εργασία θα διαγραφούν και όλες οι εργασίες που το περιέχουν!</string>
     <string name="warning_deleting_cultivation">*** Διαγράφωντας το είδος καλλιέργειας θα διαγραφούν και όλες οι καλλιέργειες που το περιέχουν!</string>
+    <string name="completed_work">Ολοκληρωμένη</string>
+    <string name="not_completed">Μη ολοκληρωμένη</string>
 
 </resources>

@@ -3,13 +3,13 @@
     <color name="secondary">#ff752c5e</color>
     <color name="secondaryDark">#ff611c4b</color>
     <!--4caf50-->
-    <color name="primary">#4CAF50</color>
+    <color name="primary">#4caf50</color>
     <!--2e7d32-->
     <color name="primaryDark">#2e7d32</color>
     <color name="ternary">#ffffff</color>
     <!--3f51b5,2980b9-->
     <color name="accent">#3f51b5</color>
-
+    <color name="tomato">#f44336</color>
     <color name="primaryText">#de000000</color>
     <color name="secondaryText">#8a000000</color>
 

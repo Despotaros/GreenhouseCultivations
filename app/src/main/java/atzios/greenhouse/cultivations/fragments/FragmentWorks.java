@@ -25,7 +25,6 @@ public class FragmentWorks extends Fragment {
     public static final String TAG = "FragmentWorks";
     private ViewPagerAdapter mViewPagerAdapter;
     private View mView;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_works_home, container, false);
@@ -60,19 +59,8 @@ public class FragmentWorks extends Fragment {
         mViewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager(),getActivity());
 
         FragmentPendingWorks pendingWorks = new FragmentPendingWorks();
-        pendingWorks.setOnFragmentInvalidated(new FragmentPendingWorks.OnFragmentInvalidated() {
-            @Override
-            public void invalidated() {
-                refresh();
-            }
-        });
         FragmentCompletedWorks completedWorks = new FragmentCompletedWorks();
-        completedWorks.setOnFragmentInvalidated(new FragmentPendingWorks.OnFragmentInvalidated() {
-            @Override
-            public void invalidated() {
-                refresh();
-            }
-        });
+
         mViewPagerAdapter.addFragment(pendingWorks, FragmentPendingWorks.TAG, getText(R.string.pending).toString());
         mViewPagerAdapter.addFragment(completedWorks, FragmentCompletedWorks.TAG, getText(R.string.completed).toString());
 

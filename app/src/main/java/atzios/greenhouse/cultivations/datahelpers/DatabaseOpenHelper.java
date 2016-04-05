@@ -12,6 +12,7 @@ import android.util.Log;
  * Created by Atzios Vasilis on 16/12/2014.
  */
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
+    private static String CLASS_TAG = "DatabaseOpenHelper";
     private static int version = 1; //Database Version
     private static String name = "greenhouse.db"; //Database Name
 
@@ -47,8 +48,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                     "CULTIVATION_ID integer,JOB_ID integer,PENDING integer,DATE numeric,COMMENTS text)");
         }
         catch (SQLiteException e) {
-            e.printStackTrace();
-
+            Log.e(CLASS_TAG,e.getMessage());
         }
 
     }

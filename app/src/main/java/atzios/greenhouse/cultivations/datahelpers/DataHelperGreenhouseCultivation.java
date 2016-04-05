@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import atzios.greenhouse.cultivations.activities.CultivationWorksActivity;
 import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 
 /**
@@ -167,7 +168,31 @@ public class DataHelperGreenhouseCultivation {
         }
 
     }
+    public String getCultivationName(int id) {
+        String name = "";
+        try {
+            SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
+            String query = "select CULTIVATION_ID from GREENHOUSE_CULTIVATION where id="+id;
+            Cursor c = db.rawQuery(query,null);
+            int cult_id = -1;
+            if(c.moveToFirst())
+                cult_id = c.getInt(0);
+            c.close();
+            query = "select CULTIVATION_NAME,COMMENTS from CULTIVATION where id="+cult_id;
+            c = db.rawQuery(query,null);
+            if(c.moveToFirst()) {
+                name = c.getString(0);
+                name += " "+c.getString(1);
+            }
+            c.close();
+            db.close();
 
+        }
+        catch (SQLiteException e) {
+            Log.e(CLASS_TAG,"getCultivationName:"+e.getMessage());
+        }
+        return name;
+    }
     /**
      * Διαγραφη την θερμοκηπιακη καλλιεργεια
      * @param id

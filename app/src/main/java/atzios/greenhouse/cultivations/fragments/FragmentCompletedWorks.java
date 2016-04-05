@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,8 @@ public class FragmentCompletedWorks extends Fragment {
     public final static String TAG = "FragmentCompletedWorks";
     private ArrayList<ContentWork> works = new ArrayList<>();
     private View mView;
-    private FragmentPendingWorks.OnFragmentInvalidated callback;
+    private int cId = -1;
+
 
 
     @Nullable
@@ -44,9 +46,7 @@ public class FragmentCompletedWorks extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return mView = inflater.inflate(R.layout.fragment_completed_works,container,false);
     }
-    public void setOnFragmentInvalidated(FragmentPendingWorks.OnFragmentInvalidated listener) {
-        callback = listener;
-    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -62,7 +62,8 @@ public class FragmentCompletedWorks extends Fragment {
      */
     private void loadData() {
         final DataHelperWork dHelper = new DataHelperWork(getActivity());
-        works = dHelper.getAll(Greenhouse.getInstance().getContent().getId(),false,-1);
+        Log.e("CompletedcID",Integer.toString(cId));
+        works = dHelper.getAll(Greenhouse.getInstance().getContent().getId(),false,cId);
         ListView listView = (ListView)mView.findViewById(R.id.lsCompletedWorks);
         ContentWorkListAdapter adapter = new ContentWorkListAdapter(getActivity(),R.layout.list_item_work,works);
         listView.setAdapter(adapter);
@@ -73,6 +74,7 @@ public class FragmentCompletedWorks extends Fragment {
                 Intent intent = new Intent(getActivity(), NewWorkActivity.class);
                 intent.putExtra("edit", true);
                 intent.putExtra("id", works.get(position).getId());
+                intent.putExtra("cID",works.get(position).getCultivationId());
                 startActivity(intent);
             }
         });
@@ -80,10 +82,12 @@ public class FragmentCompletedWorks extends Fragment {
 
 
     }
-
-
-
-
+    @Override
+    public void setArguments(Bundle args) {
+        if(args!=null)
+            cId = args.getInt("cId",-1);
+        super.setArguments(args);
+    }
 
     public static class ContentWorkListAdapter extends BaseAdapter {
         private int resLayoutID;
@@ -130,7 +134,7 @@ public class FragmentCompletedWorks extends Fragment {
                 holder.job = (CustomTextView) row.findViewById(R.id.tvJobName);
                 holder.comments = (CustomTextView) row.findViewById(R.id.tvComments);
                 holder.date = (CustomTextView) row.findViewById(R.id.tvDate);
-                holder.cult = (CustomTextView) row.findViewById(R.id.tvCult);
+
 
 
 
@@ -140,17 +144,7 @@ public class FragmentCompletedWorks extends Fragment {
                 holder = (ViewHolder) row.getTag();
             }
             //Set values of objects for every item
-            DataHelperGreenhouseCultivation helperGreenhouseCultivation = new DataHelperGreenhouseCultivation(context);
-            ContentGreenhouseCultivation cult = helperGreenhouseCultivation.get(contents.get(position).getCultivationId());
 
-            DataHelperCultivation cultHelper = new DataHelperCultivation(context);
-            String name = cultHelper.get(cult.getCultivationId()).getName();
-            String comments = cultHelper.get(cult.getCultivationId()).getComments();
-            if(name == null || name.equals(""))
-                name = context.getText(R.string.not_selected).toString();
-            if(comments == null || comments.equals(""))
-                comments = " ";
-            holder.cult.setText(context.getText(R.string.on)+":"+name +" - "+comments);
             holder.comments.setText(context.getText(R.string.comments) + ":" + (contents.get(position).getComments()));
 
             DataHelperJob helperJob = new DataHelperJob(context);
@@ -169,7 +163,7 @@ public class FragmentCompletedWorks extends Fragment {
 
         //Holds the values of every item
         static class ViewHolder {
-            CustomTextView cult;
+
             CustomTextView date;
             CustomTextView job;
             CustomTextView comments;

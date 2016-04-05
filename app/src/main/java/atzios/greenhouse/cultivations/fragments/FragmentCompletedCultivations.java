@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import atzios.greenhouse.cultivations.Greenhouse;
 import atzios.greenhouse.cultivations.R;
+import atzios.greenhouse.cultivations.activities.CultivationWorksActivity;
 import atzios.greenhouse.cultivations.activities.NewCultivationActivity;
 import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouseCultivation;
@@ -54,9 +55,10 @@ public class FragmentCompletedCultivations extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(),NewCultivationActivity.class);
-                intent.putExtra("edit",true);
-                intent.putExtra("id",cultivations.get(position).getId());
+                Intent intent = new Intent(getActivity(),CultivationWorksActivity.class);
+                intent.putExtra("cId",cultivations.get(position).getId());
+                // intent.putExtra("edit",true);
+                //intent.putExtra("id",cultivations.get(position).getId());
                 startActivity(intent);
             }
         });

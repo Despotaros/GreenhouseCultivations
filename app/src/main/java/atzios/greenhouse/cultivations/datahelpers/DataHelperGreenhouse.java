@@ -128,7 +128,7 @@ public class DataHelperGreenhouse {
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
 
             String query = "update GREENHOUSE set USER_ID="+gh.getUserId()+",GREENHOUSE_NAME='"+gh.getName()+"',AREA=" +
-                    +gh.getArea()+"',ADDRESS='"+gh.getAddress()+"'" +
+                    +gh.getArea()+",ADDRESS='"+gh.getAddress()+"'" +
                     ",IMAGE_PATH='"+gh.getImagePath()+"' where id="+gh.getId();
 
             db.execSQL(query);
