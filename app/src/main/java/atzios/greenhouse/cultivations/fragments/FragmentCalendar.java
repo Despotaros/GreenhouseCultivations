@@ -38,7 +38,6 @@ public class FragmentCalendar extends Fragment {
     public static final String TAG = "FragmentCalendar";
     private CalendarPickerView calendar;
     private View mView;
-    private ArrayList<ContentGreenhouseCultivation> cultivations;
     private ArrayList<ContentWork> works;
     private ArrayList<Date> dates;
 
@@ -49,21 +48,10 @@ public class FragmentCalendar extends Fragment {
         getDatabaseContent();
     }
     public void getDatabaseContent() {
-        cultivations = new ArrayList<>();
         works = new ArrayList<>();
 
-        DataHelperGreenhouseCultivation dHelper = new DataHelperGreenhouseCultivation(getActivity());
-        cultivations.addAll(dHelper.getAll(-1,true));
-        cultivations.addAll(dHelper.getAll(-1,false));
-
         DataHelperWork dWork = new DataHelperWork(getActivity());
-        works.addAll(dWork.getAll(-1,true,-1));
-        works.addAll(dWork.getAll(-1,false,-1));
-
-
-      //  Log.e("PendingWork",Integer.toString(dWork.getPendingWorks().size()));
-       // Log.e("PendingCult",Integer.toString(dHelper.getAlmostCompletedWorks(Greenhouse.getInstance().getContent().getId(),5).size()));
-
+        works.addAll(dWork.getPendingWorks(-1));
 
     }
     @Nullable
@@ -95,14 +83,8 @@ public class FragmentCalendar extends Fragment {
         dates = new ArrayList<>();
         long maxDate = Calendar.getInstance().getTime().getTime() ;
         long minDate = Calendar.getInstance().getTime().getTime() ;
-        /** Βρισκουμε την μεγιστη και ελαχιστη ημερομηνια των εργασιων και των καλλιεργειων **/
-        for(ContentGreenhouseCultivation c : cultivations) {
-            if(c.getStartDate() > maxDate)
-                maxDate = c.getStartDate();
-            if(c.getStartDate() < minDate)
-                minDate = c.getStartDate();
-            dates.add(new Date(c.getStartDate()));
-        }
+        /** Βρισκουμε την μεγιστη και ελαχιστη ημερομηνια των εργασιων  **/
+
         for(ContentWork w : works) {
             if(w.getDate() > maxDate)
                 maxDate = w.getDate();
@@ -128,26 +110,38 @@ public class FragmentCalendar extends Fragment {
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
-                showDateContent(date).show();
+                if(findDate(date))
+                    showDateContent(date).show();
             }
 
             @Override
             public void onDateUnselected(Date date) {
-
             }
         });
-
         if(goToNow)
             calendar.scrollToDate(Calendar.getInstance().getTime());
 
-
-
-
+    }
+    private boolean findDate(Date date) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.set(Calendar.HOUR,0);
+        c.set(Calendar.MINUTE,0);
+        c.set(Calendar.SECOND,0);
+        c.set(Calendar.MILLISECOND,0);
+        for(Date d :dates) {
+           // if(d.getYear() == date.getYear() && d.getMonth() == date.getMonth() && d.getDay() == date.getDay())
+            if(d.compareTo(date) == 0)
+                return true;
+        }
+        return false;
     }
     private Dialog showDateContent(Date date) {
+
         java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(dateFormat.format(date));
+
 
         return builder.create();
 
