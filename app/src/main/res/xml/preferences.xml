@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <PreferenceCategory android:title="@string/notifications_settings">
+  <!--  <PreferenceCategory android:title="@string/notifications_settings">
         <SwitchPreference android:title="@string/notifications"
             android:summary="@string/notifications_summary"
             android:key="notifications" />
@@ -11,7 +11,7 @@
             android:numeric="integer"
             android:key="notification_offset"/>
 
-    </PreferenceCategory>
+    </PreferenceCategory> -->
 
     <PreferenceCategory android:title="@string/data">
         <PreferenceScreen android:title="@string/delete_data"

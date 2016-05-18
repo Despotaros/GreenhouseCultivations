@@ -55,9 +55,9 @@ public class SettingsActivity extends AppCompatActivity {
             /* Δημιουργουμε τις ρυθμισεις απο το xml αρχειο */
             addPreferencesFromResource(R.xml.preferences);
 
-            final Preferences preferences = new Preferences(getActivity());
+           /* final Preferences preferences = new Preferences(getActivity());
             /* Το Switch για την ενεργοποιηση των ειδοποιησεων */
-            SwitchPreference sPref = (SwitchPreference)findPreference("notifications");
+           /* SwitchPreference sPref = (SwitchPreference)findPreference("notifications");
             sPref.setChecked(preferences.getBoolean(Preferences.NOTIFICATIONS_STATUS,true));
             sPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -68,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
             /* Το Edit text για των ορισμο των μερων ειδοποιησης πρωτου ολοκληρωθει μια εργασια */
-            EditTextPreference ePref = (EditTextPreference)findPreference("notification_offset");
+           /* EditTextPreference ePref = (EditTextPreference)findPreference("notification_offset");
             ePref.setText(Integer.toString(preferences.getInt(Preferences.DAYS_BEFORE_NOTIFY,5)));
             ePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -82,7 +82,7 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                     return false;
                 }
-            });
+            }); */
         }
     }
 }

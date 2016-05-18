@@ -70,24 +70,24 @@ public class DataHelperWork {
             else
                 subQ = "where GREENHOUSE_ID="+greenhouseId+" and pending=1 ";
             SQLiteDatabase db = new DatabaseOpenHelper(context).getReadableDatabase();
-            String query = "select * from WORK "+subQ+" and date <="
-                    + Calendar.getInstance().getTime().getTime();
+            String query = "select * from WORK "+subQ;
             Cursor c = db.rawQuery(query,null);
-            c.moveToFirst();
-            do {
-                ContentWork content = new ContentWork();
-                content.setId(c.getInt(0));
-                content.setUserId(c.getInt(1));
-                content.setGreenhouseId(c.getInt(2));
-                content.setCultivationId(c.getInt(3));
-                content.setJobId(c.getInt(4));
-                content.setPending(c.getInt(5));
-                content.setDate(c.getLong(6));
-                content.setComments(c.getString(7));
+            if(c.moveToFirst()) {
+                do {
+                    ContentWork content = new ContentWork();
+                    content.setId(c.getInt(0));
+                    content.setUserId(c.getInt(1));
+                    content.setGreenhouseId(c.getInt(2));
+                    content.setCultivationId(c.getInt(3));
+                    content.setJobId(c.getInt(4));
+                    content.setPending(c.getInt(5));
+                    content.setDate(c.getLong(6));
+                    content.setComments(c.getString(7));
 
-                pending.add(content);
+                    pending.add(content);
 
-            } while (c.moveToNext());
+                } while (c.moveToNext());
+            }
 
             c.close();
             db.close();
@@ -135,7 +135,7 @@ public class DataHelperWork {
                 subQ = "where GREENHOUSE_ID="+greenhouseId+" and PENDING="+(pending ? 1 : 0)+" and CULTIVATION_ID="+cultivationId;
             SQLiteDatabase db = new DatabaseOpenHelper(context).getWritableDatabase();
             String query = "select * from WORK "+subQ;
-            Log.e("query",query);
+
             Cursor cursor = db.rawQuery(query, null);
             if (cursor.moveToFirst()) {
                 do {

@@ -28,7 +28,7 @@ import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouseCultivatio
 
 
 /**
- * Created by Panos on 11/9/2015.
+ * Created by Ατζιος on 11/9/2015.
  */
 public class FragmentActiveCultivations extends Fragment {
     public static final String TAG = "FragmentActiveCultivations";

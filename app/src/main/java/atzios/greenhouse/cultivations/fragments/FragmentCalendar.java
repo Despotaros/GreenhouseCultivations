@@ -1,15 +1,15 @@
 package atzios.greenhouse.cultivations.fragments;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
-import android.graphics.PorterDuff;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +17,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 import com.squareup.timessquare.CalendarPickerView;
 
@@ -24,15 +26,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import atzios.greenhouse.cultivations.Greenhouse;
+import atzios.greenhouse.cultivations.CustomTextView;
 import atzios.greenhouse.cultivations.R;
-import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 import atzios.greenhouse.cultivations.contents.ContentWork;
-import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouseCultivation;
+import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouse;
+import atzios.greenhouse.cultivations.datahelpers.DataHelperJob;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperWork;
 
 /**
- * Created by Panos on 11/9/2015.
+ * Created by Ατζιος on 11/9/2015.
  */
 public class FragmentCalendar extends Fragment {
     public static final String TAG = "FragmentCalendar";
@@ -45,8 +47,16 @@ public class FragmentCalendar extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        getDatabaseContent();
+     //   getDatabaseContent();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getDatabaseContent();
+        initializeCalendar(true);
+    }
+
     public void getDatabaseContent() {
         works = new ArrayList<>();
 
@@ -69,7 +79,7 @@ public class FragmentCalendar extends Fragment {
             }
         });
         registerForContextMenu(fab);
-        initializeCalendar(true);
+        //initializeCalendar(true);
         return mView;
     }
 
@@ -110,6 +120,7 @@ public class FragmentCalendar extends Fragment {
         calendar.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
             @Override
             public void onDateSelected(Date date) {
+
                 if(findDate(date))
                     showDateContent(date).show();
             }
@@ -122,16 +133,34 @@ public class FragmentCalendar extends Fragment {
             calendar.scrollToDate(Calendar.getInstance().getTime());
 
     }
-    private boolean findDate(Date date) {
+    private ArrayList<ContentWork> filterWorksByDate(Date date) {
+        ArrayList<ContentWork> filterWorks = new ArrayList<>();
+        for(ContentWork w : works) {
+            if(date.compareTo(trimDate(new Date(w.getDate())))==0 ) {
+                filterWorks.add(w);
+            }
+        }
+        return filterWorks;
+    }
+    /**
+     * Μηδενιζει στην ημερομηνια την ωρα
+     * @param date Αρχικη ημερομηνια
+     * @return  Η ημερομηνια με 0 ωρα
+     */
+    private Date trimDate(Date date) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        c.set(Calendar.HOUR,0);
+            /* Μηδενιζουμε στην ημερομηνια την ωρα */
+        c.set(Calendar.HOUR_OF_DAY,0);
         c.set(Calendar.MINUTE,0);
         c.set(Calendar.SECOND,0);
         c.set(Calendar.MILLISECOND,0);
+        return c.getTime();
+    }
+    private boolean findDate(Date date) {
+
         for(Date d :dates) {
-           // if(d.getYear() == date.getYear() && d.getMonth() == date.getMonth() && d.getDay() == date.getDay())
-            if(d.compareTo(date) == 0)
+            if(date.compareTo(trimDate(d))==0)
                 return true;
         }
         return false;
@@ -141,8 +170,13 @@ public class FragmentCalendar extends Fragment {
         java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(dateFormat.format(date));
-
-
+        View layout = getActivity().getLayoutInflater().inflate(R.layout.dialog_calendar_work,(ViewGroup)mView,false);
+        ListView lv = (ListView)layout.findViewById(R.id.listWorks);
+        ContentWorkListAdapter adapter = new ContentWorkListAdapter(getActivity(),R.layout.list_item_calendar,filterWorksByDate(date));
+        lv.setAdapter(adapter);
+        builder.setView(layout);
+        builder.setPositiveButton(R.string.cancel,null);
+        //filterWorksByDate(date);
         return builder.create();
 
     }
@@ -156,8 +190,87 @@ public class FragmentCalendar extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_today) {
             calendar.selectDate(Calendar.getInstance().getTime(),true);
-           // calendar.scrollToDate();
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     *
+     */
+    public static class ContentWorkListAdapter extends BaseAdapter {
+        private int resLayoutID;
+        private Context context;
+        ArrayList<ContentWork> contents;
+
+        //Constructor
+        public ContentWorkListAdapter(Context context, int layoutID, ArrayList<ContentWork> contents) {
+
+            this.context = context;
+            this.contents = contents;
+            resLayoutID = layoutID;
+        }
+
+        public int getCount() {
+            return contents.size();
+        }
+
+        public Object getItem(int position) {
+            return contents.get(position);
+        }
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            //Create item view
+            ViewHolder holder;
+            View row = convertView;
+
+            if (row == null) {
+                LayoutInflater inflater = ((Activity) context).getLayoutInflater();
+                row = inflater.inflate(resLayoutID, parent, false);
+
+                holder = new ViewHolder();
+
+                //Handle the objects of a list item
+                holder.name = (CustomTextView) row.findViewById(R.id.tvWorkName);
+                holder.comments = (CustomTextView) row.findViewById(R.id.tvWorkComments);
+                holder.greenhouse = (CustomTextView) row.findViewById(R.id.tvGreenhouse);
+                holder.completed = (CustomTextView) row.findViewById(R.id.tvCompleted);
+                row.setTag(holder);
+        } else {
+            // Get the ViewHolder back to get fast access to the TextViews
+            holder = (ViewHolder) row.getTag();
+        }
+        //Set values of objects for every item
+
+        holder.comments.setText(context.getText(R.string.comments) + ":" + (contents.get(position).getComments()));
+
+        DataHelperJob helperJob = new DataHelperJob(context);
+        holder.name.setText(helperJob.get(contents.get(position).getJobId()).getName() +" - " +
+                helperJob.get(contents.get(position).getJobId()).getComments());
+        if(contents.get(position).isPending())
+            holder.completed.setText(R.string.pending);
+        else
+            holder.completed.setText(R.string.completed);
+
+            DataHelperGreenhouse g = new DataHelperGreenhouse(context);
+
+            holder.greenhouse.setText(g.get(contents.get(position).getGreenhouseId()).getName());
+
+
+        return row;
+    }
+
+    //Holds the values of every item
+    static class ViewHolder {
+
+        CustomTextView name;
+        CustomTextView comments;
+        CustomTextView greenhouse;
+        CustomTextView completed;
+    }
+
+
+}
 }

@@ -22,7 +22,7 @@ import atzios.greenhouse.cultivations.ViewPagerAdapter;
 
 
 /**
- * Created by Panos on 9/9/2015.
+ * Created by Ατζιος on 9/9/2015.
  */
 public class FragmentCultivations extends Fragment {
     public static final String TAG = "FragmentCultivations";

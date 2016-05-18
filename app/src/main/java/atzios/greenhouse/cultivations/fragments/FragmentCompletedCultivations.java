@@ -20,7 +20,7 @@ import atzios.greenhouse.cultivations.contents.ContentGreenhouseCultivation;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouseCultivation;
 
 /**
- * Created by BASILIS on 12/12/2015.
+ * Created by Ατζιος on 12/12/2015.
  */
 public class FragmentCompletedCultivations extends Fragment {
     public final static String TAG = "FragmentCompletedCultivations";

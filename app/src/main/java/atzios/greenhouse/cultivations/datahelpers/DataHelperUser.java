@@ -7,7 +7,7 @@ import android.util.Log;
 import atzios.greenhouse.cultivations.contents.ContentUser;
 
 /**
- * Created by Panos on 22/12/2014.
+ * Created by Ατζιος on 22/12/2014.
  */
 public class DataHelperUser {
     private String CLASS_TAG = "DataHelperUser";

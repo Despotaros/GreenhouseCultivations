@@ -2,7 +2,7 @@ package atzios.greenhouse.cultivations.contents;
 
 /**
  * Content Class Krataei to plithos twn kaliergion kai ton douleion enos thermokipiou
- * Created by Panos on 19/11/2015.
+ * Created by Ατζιος on 19/11/2015.
  */
 public class ContentGreenhouseReport {
     private int totalCultivations;

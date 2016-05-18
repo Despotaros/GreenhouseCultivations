@@ -31,7 +31,7 @@ import atzios.greenhouse.cultivations.datahelpers.DataHelperJob;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperWork;
 
 /**
- * Created by panos on 29/12/2015.
+ * Created by Ατζιος on 29/12/2015.
  */
 public class FragmentCompletedWorks extends Fragment {
     public final static String TAG = "FragmentCompletedWorks";

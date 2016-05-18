@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
-</LinearLayout>
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvWorkName"
+        android:text="WorkName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="15sp" />
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvWorkComments"
+        android:text="tvWorkName"
+        android:layout_below="@+id/tvWorkName"
+        android:layout_alignLeft="@+id/tvWorkName"
+        android:layout_alignStart="@+id/tvWorkName"
+        android:textSize="15sp" />
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvGreenhouse"
+        android:layout_below="@+id/tvWorkComments"
+        android:layout_alignLeft="@+id/tvWorkComments"
+        android:layout_alignStart="@+id/tvWorkComments"
+        android:text="Greenhouse"
+        android:textSize="15sp" />
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvCompleted"
+        android:text="WorkName"
+        android:layout_marginRight="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_alignBaseline="@+id/tvGreenhouse"
+        android:layout_alignBottom="@+id/tvGreenhouse"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="15sp" />
+</RelativeLayout>

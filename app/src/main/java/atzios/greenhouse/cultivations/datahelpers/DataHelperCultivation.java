@@ -11,7 +11,7 @@ import atzios.greenhouse.cultivations.contents.ContentCultivation;
 import atzios.greenhouse.cultivations.contents.ContentJob;
 
 /**
- * Created by Panos on 22/12/2014.
+ * Created by Ατζιος on 22/12/2014.
  */
 public class DataHelperCultivation {
     private Context context;

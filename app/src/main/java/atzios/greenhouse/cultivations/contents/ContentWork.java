@@ -4,7 +4,7 @@ package atzios.greenhouse.cultivations.contents;
 /**
  * Content class for Work
  * Contains all work's properties
- * Created by Panos on 16/12/2014.
+ * Created by Ατζιος on 16/12/2014.
  */
 public class ContentWork {
     private int id; //Work id

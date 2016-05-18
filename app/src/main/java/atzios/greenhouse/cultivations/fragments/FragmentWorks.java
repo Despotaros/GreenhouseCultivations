@@ -19,7 +19,9 @@ import atzios.greenhouse.cultivations.activities.NewCultivationActivity;
 import atzios.greenhouse.cultivations.activities.NewWorkActivity;
 
 /**
- * Created by panos on 29/12/2015.
+ * Fragment Works
+ * Fragment Γονεας οπου περιεχει 2 fragments των εργασιων που χωριζονται σε ενεργες και ολοκληρωμενες
+ * Created by Ατζιος on 29/12/2015.
  */
 public class FragmentWorks extends Fragment {
     public static final String TAG = "FragmentWorks";

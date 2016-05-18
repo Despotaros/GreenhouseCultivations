@@ -21,7 +21,7 @@ import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouse;
 
 /**
  * FragmentCreateGreenhouse Dimiourgi neo thermokipoiw
- * Created by Panos on 31/10/2015.
+ * Created by Ατζιος on 31/10/2015.
  */
 public class FragmentCreateGreenhouse extends Fragment {
     public final static String TAG = "FragmentCreateGreenhouse";

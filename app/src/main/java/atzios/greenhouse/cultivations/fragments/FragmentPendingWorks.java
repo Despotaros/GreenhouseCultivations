@@ -20,7 +20,7 @@ import atzios.greenhouse.cultivations.contents.ContentWork;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperWork;
 
 /**
- * Created by panos on 29/12/2015.
+ * Created by Ατζιος on 29/12/2015.
  */
 public class FragmentPendingWorks extends Fragment {
     public final static String TAG = "FragmentPendingWorks";
