@@ -53,6 +53,44 @@
         android:textColor="@color/primaryText"
         android:visibility="gone" />
 
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:text="@string/name_of_user"
+        android:textColor="@color/primaryText"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edNameOfUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:hint="@string/hint_name_of_user"
+        android:singleLine="true" />
+
+    <atzios.greenhouse.cultivations.CustomTextView
+        android:id="@+id/textView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:text="@string/lastname"
+        android:textColor="@color/primaryText"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/edLastname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:hint="@string/hint_lastname"
+        android:singleLine="true" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

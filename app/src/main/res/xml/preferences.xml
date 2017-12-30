@@ -14,12 +14,28 @@
     </PreferenceCategory> -->
 
     <PreferenceCategory android:title="@string/data">
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="name_of_user"
+            android:title="@string/name" />
+        <EditTextPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="last_name_of_user"
+            android:title="@string/lastname" />
         <PreferenceScreen android:title="@string/delete_data"
             android:key="delete_data"
             android:summary="@string/delete_data_summary"/>
 
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/about">
+        <PreferenceScreen
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:key="email"
+            android:summary="@string/email_summary"
+            android:title="@string/email" />
         <PreferenceScreen android:title="@string/version"
             android:key="version"
             android:summary="@string/version_name"/>

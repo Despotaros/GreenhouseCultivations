@@ -19,6 +19,8 @@ public class Preferences {
     public final static String DRAWER_STATE = "drawer_state";
     public final static String DAYS_BEFORE_NOTIFY = "days_before_notify";
     public final static String NOTIFICATIONS_STATUS = "notification_status";
+    public final static String NAME_OF_USER = "name_of_user";
+    public final static String LASTNAME_OF_USER = "last_name_of_user";
     /**
      * Το ονομα του αρχειου οπου θα αποθηκευονται η ρυθμισεις μας
      */

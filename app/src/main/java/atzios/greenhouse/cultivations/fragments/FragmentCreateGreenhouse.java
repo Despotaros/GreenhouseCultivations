@@ -17,7 +17,9 @@ import atzios.greenhouse.cultivations.Preferences;
 import atzios.greenhouse.cultivations.R;
 import atzios.greenhouse.cultivations.activities.MainActivity;
 import atzios.greenhouse.cultivations.contents.ContentGreenhouse;
+import atzios.greenhouse.cultivations.contents.ContentUser;
 import atzios.greenhouse.cultivations.datahelpers.DataHelperGreenhouse;
+import atzios.greenhouse.cultivations.datahelpers.DataHelperUser;
 
 /**
  * FragmentCreateGreenhouse Dimiourgi neo thermokipoiw
@@ -72,12 +74,20 @@ public class FragmentCreateGreenhouse extends Fragment {
         contentGreenhouse.setArea(area);
         ed = (EditText)mView.findViewById(R.id.edAddress);
         contentGreenhouse.setAddress(ed.getText().toString());
+
+        Preferences pre = new Preferences(getActivity());
+        ed = (EditText)mView.findViewById(R.id.edNameOfUser);
+        pre.put(Preferences.NAME_OF_USER,ed.getText().toString());
+
+
+        ed = (EditText)mView.findViewById(R.id.edLastname);
+        pre.put(Preferences.LASTNAME_OF_USER,ed.getText().toString());
+
                 /* Γραψε το θερμοκηπιο στην βαση */
         if(!contentGreenhouse.getName().equals("")) {
             DataHelperGreenhouse dHelper = new DataHelperGreenhouse(getActivity());
             dHelper.create(contentGreenhouse);
             /* Ξεκινα την main activity */
-            Preferences pre = new Preferences(getActivity());
             pre.put(Preferences.FIRST_RUN, false);
             Intent main = new Intent(getActivity(),MainActivity.class);
             startActivity(main);
@@ -85,5 +95,10 @@ public class FragmentCreateGreenhouse extends Fragment {
         }
         else
             Toast.makeText(getActivity(), R.string.greenhouse_empty_name, Toast.LENGTH_LONG).show();
+
+
+
+
+
     }
 }

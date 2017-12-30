@@ -99,5 +99,9 @@
   <string name="warning_deleting_cultivation">*** Deleting a cultivation type , will also deletes the cultivations with this cultivation type!</string>
   <string name="completed_work">Completed</string>
   <string name="not_completed">Not completed</string>
+    <string name="name_of_user">Your name</string>
+    <string name="hint_name_of_user">Enter your name (Optional)</string>
+    <string name="lastname">Lastname</string>
+    <string name="hint_lastname">Enter your lastname (Optional)</string>
 
 </resources>
