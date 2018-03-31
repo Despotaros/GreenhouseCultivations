@@ -89,9 +89,9 @@
     <string name="warning_deleting_cultivation">*** Διαγράφωντας το είδος καλλιέργειας θα διαγραφούν και όλες οι καλλιέργειες που το περιέχουν!</string>
     <string name="completed_work">Ολοκληρωμένη</string>
     <string name="not_completed">Μη ολοκληρωμένη</string>
-    <string name="name_of_user">Your name</string>
+    <string name="name_of_user">Όνομα</string>
     <string name="hint_name_of_user">Το όνομα σας (Προαιρετικό)</string>
-    <string name="lastname">Lastname</string>
+    <string name="lastname">Επίθετο</string>
     <string name="hint_lastname">Το επιθετό σας (Προαιρετικό)</string>
 
 </resources>
