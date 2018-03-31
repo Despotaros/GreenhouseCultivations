@@ -92,10 +92,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.open,
                 R.string.close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        Preferences pref = new Preferences(getApplicationContext());
+        String name = pref.getString(Preferences.NAME_OF_USER,"");
+        name+=" "+ pref.getString(Preferences.LASTNAME_OF_USER,"");
+        if(name.trim().isEmpty()) {
+            name="-";
+        }
+
+        MenuItem item = navigationView.getMenu().findItem(R.id.menu_user_name);
+        if(item != null) {
+            item.setTitle(name);
+        }
+        //mDrawerLayout.findViewById()
+
         mDrawerToggle.syncState();
 
         /* Η ρυθμισεις μας */
-        Preferences pref  = new Preferences(this);
+
         /* Αν ειναι η πρωτη φορα που τρεχει η εφαρμογη διχνουμε στον χρηστη το συρταρι */
         if(!pref.getBoolean(Preferences.DRAWER_STATE,false)) {
             pref.put(Preferences.DRAWER_STATE,true);

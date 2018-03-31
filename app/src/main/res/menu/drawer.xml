@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <!-- group with single selected item so only one item is highlighted in the nav menu -->
+  <group android:enabled="false" android:id="@+id/menu_user">
+    <item
+      android:id="@+id/menu_user_name"
+      android:enabled="false"
+      android:title="@string/name_of_user"/>
+  </group>
   <group android:checkableBehavior="single" android:id="@+id/menu_up" >
 
     <item

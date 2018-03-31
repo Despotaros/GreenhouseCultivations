@@ -81,7 +81,7 @@
   <string name="version">Version</string>
   <string name="version_name" translatable="false">1.0.0</string>
   <string name="email" translatable="false">Email</string>
-  <string name="email_summary" translatable="false">Atzios</string>
+  <string name="email_summary" translatable="false">lantzos@teiser.gr</string>
   <string name="notifications_settings">Notifications settings</string>
   <string name="notifications">Notifications</string>
   <string name="notifications_summary">Enables or disables notifications</string>
@@ -103,5 +103,8 @@
     <string name="hint_name_of_user">Enter your name (Optional)</string>
     <string name="lastname">Lastname</string>
     <string name="hint_lastname">Enter your lastname (Optional)</string>
+  <string name="about_message" translatable="false">Η εφαρμογή Θερμοκηπιακές - Κηπευτικές καλλιέργειες αποτελεί προιόν ελεύθερου λογισμικου και πνευματικής ιδιοκτησίας του Τμήματος Μηχανικών Πληροφορικής του ΤΕΙ Κεντρικής Μακεδονίας.
+Αναπτύχθηκε στα πλαίσια πτυχιακής εργασίας απο τον σπουδαστή Ατζιο Βασίλειο ΑΕΜ (2226) κατόπιν εισήγησης και επιτήρησης του Δρ. Θεόδωρου Λάντζου υπεύθυνου του εργαστηρίου ΕΓΕΚΤ http://egekt.teiser.gr
+</string>
 
 </resources>

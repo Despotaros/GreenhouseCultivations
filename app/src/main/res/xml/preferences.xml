@@ -12,7 +12,7 @@
             android:key="notification_offset"/>
 
     </PreferenceCategory> -->
-
+    <!--
     <PreferenceCategory android:title="@string/data">
         <EditTextPreference
             android:layout_width="wrap_content"
@@ -28,14 +28,14 @@
             android:key="delete_data"
             android:summary="@string/delete_data_summary"/>
 
-    </PreferenceCategory>
+    </PreferenceCategory> -->
     <PreferenceCategory android:title="@string/about">
         <PreferenceScreen
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:key="email"
-            android:summary="@string/email_summary"
-            android:title="@string/email" />
+            android:key="info"
+            android:summary="@string/about_message"
+            android:title="@string/info" />
         <PreferenceScreen android:title="@string/version"
             android:key="version"
             android:summary="@string/version_name"/>
